@@ -1,0 +1,85 @@
+package models;
+
+/**
+ * @author André Felipe
+ * */
+
+public class Animal {
+
+	private String raca;
+	private String especie;
+	private String porte;
+	private String sexo;
+	
+	/**
+	 * Método construtor da classe Animal
+	 * @param null
+	 * */
+	public Animal() {
+	}
+	
+	/**
+	 * Método setRaca, encapsula o acesso à variável raca
+	 * @param String
+	 * @return null
+	 * */
+	public void setRaca(String raca) {
+		this.raca = raca;
+	}
+	/**
+	 * Método getRaca, encapsula o acesso à variável raca
+	 * @param null
+	 * @return String
+	 * */
+	public String getRaca() {
+		return this.raca;
+	}
+	/**
+	 * Método setEspecie, encapsula o acesso à variável especie
+	 * @param String
+	 * @return null
+	 * */
+	public void setEspecie(String especie) {
+		this.especie = especie;
+	}
+	/**
+	 * Método getEspecie, encapsula o acesso à variável especie
+	 * @param null
+	 * @return String
+	 * */
+	public String getEspecie() {
+		return this.especie;
+	}
+	/**
+	 * Método setPorte, encapsula o acesso à variável porte
+	 * @param String
+	 * @return null
+	 * */
+	public void setPorte(String porte) {
+		this.porte = porte;
+	}
+	/**
+	 * Método getPorte, encapsula o acesso à variável porte
+	 * @param null
+	 * @return String
+	 * */
+	public String getPorte() {
+		return this.porte;
+	}
+	/**
+	 * Método setSexo, encapsula o acesso à variável sexo
+	 * @param String
+	 * @return null
+	 * */
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
+	}
+	/**
+	 * Método getSexo, encapsula o acesso à variável sexo
+	 * @param null
+	 * @return String
+	 * */
+	public String getSexo() {
+		return this.sexo;
+	}
+}
