@@ -1,8 +1,8 @@
-package models;
-
 /**
  * @author André Felipe
  * */
+
+package models;
 
 public class Animal {
 
