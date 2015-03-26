@@ -4,8 +4,20 @@
 
 package models;
 
-public class Endereco {
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
+public class Endereco implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
 	private int numero;
 	private String rua;
 	private String bairro;
@@ -21,6 +33,22 @@ public class Endereco {
 	public Endereco() {
 	}
 	
+	/**
+	 * Método setId, encapsula o acesso à variável id
+	 * @param long
+	 * @return null
+	 * */
+	public void setId(long id) {
+		this.id = id;
+	}
+	/**
+	 * Método setId, encapsula o acesso à variável id
+	 * @param null
+	 * @return long
+	 * */
+	public long getId() {
+		return this.id;
+	}
 	/**
 	 * Método setNumero, encapsula o acesso à variável numero
 	 * @param int
