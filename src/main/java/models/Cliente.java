@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Cliente extends Pessoa {
 
-	private List<OwnedPet> animaisDeEstimacao;
+	private List<Animal> animaisDeEstimacao;
 	
 	/**
 	 * Método construtor da classe Cliente
@@ -21,10 +21,10 @@ public class Cliente extends Pessoa {
 	
 	/**
 	 * Método addAnimalDeEstimacao, adiciona um animal de estiamação ao array list
-	 * @param OwnedPet
+	 * @param Animal
 	 * @return null 
 	 * */
-	public void addAnimalDeEstimacao(OwnedPet pet) {
+	public void addAnimalDeEstimacao(Animal pet) {
 		this.animaisDeEstimacao.add(pet);
 	}
 	
@@ -33,7 +33,7 @@ public class Cliente extends Pessoa {
 	 * @param ArrayList
 	 * @return null
 	 * */
-	public void setAnimaisDeEstimacao(ArrayList<OwnedPet> animais) {
+	public void setAnimaisDeEstimacao(ArrayList<Animal> animais) {
 		this.animaisDeEstimacao = animais;
 	}
 	/**
@@ -41,7 +41,7 @@ public class Cliente extends Pessoa {
 	 * @param null
 	 * @return List
 	 * */
-	public List<OwnedPet> getAnimaisDeEstimacao() {
+	public List<Animal> getAnimaisDeEstimacao() {
 		return this.animaisDeEstimacao;
 	}
 }
