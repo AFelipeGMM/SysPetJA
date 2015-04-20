@@ -10,7 +10,7 @@ public class Main {
 		Endereco endereco = new Endereco();
 		
 		endereco.setNumero(20);
-		endereco.setRua("Antônio V. Galvão");
+		endereco.setRua("AntÃ´nio V. GalvÃ£o");
 		endereco.setBairro("Gilberto Pinheiro");
 		endereco.setCidade("Currais Novos");
 		endereco.setUF("RN");

@@ -1,5 +1,5 @@
 /**
- * @author André Felipe
+ * @author AndrÃ© Felipe
  * */
 
 package models;
@@ -11,14 +11,14 @@ public class Pessoa {
 	private Endereco endereco;
 	
 	/**
-	 * Método construtor da classe Pessoa
+	 * Metodo construtor da classe Pessoa
 	 * @param null
 	 * */
 	public Pessoa() {		
 	}
 	
 	/**
-	 * Método setNome, encapsula o acesso à variável "nome"
+	 * Metodo setNome, encapsula o acesso a variavel "nome"
 	 * @param String
 	 * @return null
 	 * */
@@ -26,7 +26,7 @@ public class Pessoa {
 		this.nome = nome;
 	}
 	/**
-	 * Método getNome, encapsula o acesso à variável "nome"
+	 * Metodo getNome, encapsula o acesso a variavel "nome"
 	 * @param null
 	 * @return String
 	 * */
@@ -34,7 +34,7 @@ public class Pessoa {
 		return this.nome;
 	}
 	/**
-	 * Método setCPF, encapsula o acesso à variável cpf
+	 * Metodo setCPF, encapsula o acesso a variavel cpf
 	 * @param long
 	 * @return null
 	 * */
@@ -42,7 +42,7 @@ public class Pessoa {
 		this.cpf = cpf;
 	}
 	/**
-	 * Método getCPF, encapsula o acesso à variável cpf
+	 * Metodo getCPF, encapsula o acesso a variavel cpf
 	 * @param null
 	 * @return long
 	 * */
@@ -50,7 +50,7 @@ public class Pessoa {
 		return this.cpf;
 	}
 	/**
-	 * Método setEndereco, encapsula o acesso à variável endereco
+	 * Metodo setEndereco, encapsula o acesso a variavel endereco
 	 * @param Endereco
 	 * @return null
 	 * */
@@ -58,7 +58,7 @@ public class Pessoa {
 		this.endereco = endereco;
 	}
 	/**
-	 * Método getEndereco, encapsula o acesso à variável endereco
+	 * Metodo getEndereco, encapsula o acesso a variavel endereco
 	 * @param null
 	 * @return Endereco
 	 * */

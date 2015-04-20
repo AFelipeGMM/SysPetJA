@@ -10,7 +10,7 @@ public class EnderecoService {
 	private EntityManagerFactory emf = null;
 	
 	/**
-	 * Método construtor da classe EnderecoService
+	 * Metodo construtor da classe EnderecoService
 	 * @param EntityManagerFactory
 	 * */
 	public EnderecoService(EntityManagerFactory emf) {
@@ -18,7 +18,7 @@ public class EnderecoService {
 	}
 	
 	/**
-	 * Método createEndereco, persiste um endereco no DB
+	 * Metodo createEndereco, persiste um endereco no DB
 	 * @param Endereco
 	 * @return null
 	 * */
@@ -40,7 +40,7 @@ public class EnderecoService {
 	}
 	
 	/**
-	 * Método createEntityManager, cria um EntityManager para ser usado no service
+	 * Metodo createEntityManager, cria um EntityManager para ser usado no service
 	 * @param null
 	 * @return EntityManager
 	 * */
@@ -49,7 +49,7 @@ public class EnderecoService {
 	}
 	
 	/**
-	 * Método setEMF, encapsula o acesso à variável emf
+	 * Metodo setEMF, encapsula o acesso a variavel emf
 	 * @param EntityManagerFactory
 	 * @return null
 	 * */
@@ -57,7 +57,7 @@ public class EnderecoService {
 		this.emf = emf;
 	}
 	/**
-	 * Método getEMF, encapsula o acesso à variável emf
+	 * Metodo getEMF, encapsula o acesso a variavel emf
 	 * @param null
 	 * @return EntityManagerFactory
 	 * */

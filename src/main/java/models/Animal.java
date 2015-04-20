@@ -1,5 +1,5 @@
 /**
- * @author AndrÈ Felipe
+ * @author Andr√© Felipe
  * */
 
 package models;
@@ -12,14 +12,14 @@ public class Animal {
 	private String sexo;
 	
 	/**
-	 * MÈtodo construtor da classe Animal
+	 * M√©todo construtor da classe Animal
 	 * @param null
 	 * */
 	public Animal() {
 	}
 	
 	/**
-	 * MÈtodo setRaca, encapsula o acesso ‡ vari·vel raca
+	 * M√©todo setRaca, encapsula o acesso a vari√°vel raca
 	 * @param String
 	 * @return null
 	 * */
@@ -27,7 +27,7 @@ public class Animal {
 		this.raca = raca;
 	}
 	/**
-	 * MÈtodo getRaca, encapsula o acesso ‡ vari·vel raca
+	 * M√©todo getRaca, encapsula o acesso a vari√°vel raca
 	 * @param null
 	 * @return String
 	 * */
@@ -35,7 +35,7 @@ public class Animal {
 		return this.raca;
 	}
 	/**
-	 * MÈtodo setEspecie, encapsula o acesso ‡ vari·vel especie
+	 * M√©todo setEspecie, encapsula o acesso a vari√°vel especie
 	 * @param String
 	 * @return null
 	 * */
@@ -43,7 +43,7 @@ public class Animal {
 		this.especie = especie;
 	}
 	/**
-	 * MÈtodo getEspecie, encapsula o acesso ‡ vari·vel especie
+	 * M√©todo getEspecie, encapsula o acesso a vari√°vel especie
 	 * @param null
 	 * @return String
 	 * */
@@ -51,7 +51,7 @@ public class Animal {
 		return this.especie;
 	}
 	/**
-	 * MÈtodo setPorte, encapsula o acesso ‡ vari·vel porte
+	 * M√©todo setPorte, encapsula o acesso a vari√°vel porte
 	 * @param String
 	 * @return null
 	 * */
@@ -59,7 +59,7 @@ public class Animal {
 		this.porte = porte;
 	}
 	/**
-	 * MÈtodo getPorte, encapsula o acesso ‡ vari·vel porte
+	 * Metodo getPorte, encapsula o acesso a variavel porte
 	 * @param null
 	 * @return String
 	 * */
@@ -67,7 +67,7 @@ public class Animal {
 		return this.porte;
 	}
 	/**
-	 * MÈtodo setSexo, encapsula o acesso ‡ vari·vel sexo
+	 * Metodo setSexo, encapsula o acesso a variavel sexo
 	 * @param String
 	 * @return null
 	 * */
@@ -75,7 +75,7 @@ public class Animal {
 		this.sexo = sexo;
 	}
 	/**
-	 * MÈtodo getSexo, encapsula o acesso ‡ vari·vel sexo
+	 * Metodo getSexo, encapsula o acesso a variavel sexo
 	 * @param null
 	 * @return String
 	 * */
