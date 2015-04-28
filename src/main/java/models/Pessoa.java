@@ -4,8 +4,20 @@
 
 package models;
 
-public class Pessoa {
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
+public class Pessoa implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
 	private String nome;
 	private long cpf;
 	private Endereco endereco;
@@ -15,6 +27,13 @@ public class Pessoa {
 	 * @param null
 	 * */
 	public Pessoa() {		
+	}
+	
+	public void setId(long id) {
+		this.id = id;
+	}
+	public long getId() {
+		return this.id;
 	}
 	
 	/**
