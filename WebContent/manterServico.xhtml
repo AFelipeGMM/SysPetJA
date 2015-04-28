@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Sistema de gerenciamento de Pet Shop - Cadastro Servico</title>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+            <center>
+                <h:form id="formulario">
+                    <h:panelGrid>
+                        <p:panel header="Cadastrar servico">
+                            <h:panelGrid columns="2">
+                                <h:outputText value="Informe o tipo de Servico: "/>
+                                <p:inputText id="tipo" value="#{servicoMB.servico.tipo}" maxlength="50"/>
+                                <h:outputText value="Taxa do Servico: "/>  
+                                <p:inputText id="valor" value="#{servicoMB.servico.valor}" maxlength="50"/>                                                       
+	
+                                <p:commandButton value="GRAVAR" action="#{servicoMB.salvar()}" />
+                                <p:commandButton value="LIMPAR" type="reset"/>
+                            </h:panelGrid>
+                        </p:panel>
+                    </h:panelGrid>
+                </h:form>
+            </center>
+        </h:body>
+
+    </f:view>
+</html>
