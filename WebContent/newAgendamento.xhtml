@@ -1,0 +1,63 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+	<h:head>
+		<title>SysPetJA - Agendamento</title>
+	</h:head>
+	
+	<h:body>
+	
+	<h:form>
+		<p:layoutUnit position="top" >
+            <p:menubar>  
+                 <p:menuitem value="Início" url="" icon="ui-icon-home" />  
+                    <p:submenu label="Cliente" >
+                        <p:menuitem value="Pesquisar" url="/faces/pagPesquisarCliente.xhtml"/>
+                        <p:menuitem value="Cadastrar" url="/faces/pagManterCliente.xhtml"/>
+                    </p:submenu>
+                    <p:submenu label="Funcionario" >
+                        <p:menuitem value="Pesquisar" />
+                        <p:menuitem value="Cadastrar" url="/faces/pagManterFuncionario.xhtml"/>
+                    </p:submenu>
+                    <p:submenu label="Agendamento" >
+                    	<p:menuitem value="Confirmar agendas"/>
+                        <p:menuitem value="Pesquisar" />
+                        <p:menuitem value="Cadastrar" url="/faces/newAgendamento.xhtml"/>
+                    </p:submenu>
+                    <p:submenu label="Servico" >
+                        <p:menuitem value="Pesquisar" />
+                        <p:menuitem value="Cadastrar" url="/faces/pagManterServico.xhtml"/>
+                    </p:submenu>
+                </p:menubar>
+            </p:layoutUnit>
+            </h:form>
+		<h:form>
+		    <p:growl id="messages" showDetail="true" />
+		 
+		    <h:panelGrid columnClasses="value">
+		        <h3 style="margin-top: 0">Editable Schedule</h3>
+		        <p:schedule id="schedule" value="#{scheduleView.eventModel}" widgetVar="myschedule" timeZone="GMT+2">
+		 
+		            <p:ajax event="dateSelect" listener="#{scheduleView.onDateSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
+		            <p:ajax event="eventSelect" listener="#{scheduleView.onEventSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
+		            <p:ajax event="eventMove" listener="#{scheduleView.onEventMove}" update="messages" />
+		            <p:ajax event="eventResize" listener="#{scheduleView.onEventResize}" update="messages" />
+		 
+		        </p:schedule>
+		    </h:panelGrid>
+		 
+		    <p:dialog widgetVar="eventDialog" header="Novo Serviço" showEffect="clip" hideEffect="clip">
+		        <h:panelGrid id="eventDetails" columns="2">
+		            <h:outputText value="Serviço"/>
+		            <p:inputText id="servico"/>
+		            
+		            <p:commandButton id="addButton" value="Concluir" actionListener="#{scheduleView.addEvent}" oncomplete="PF('myschedule').update();PF('eventDialog').hide();" />
+		            <p:commandButton type="reset" value="Limpar" />
+		        </h:panelGrid>
+		    </p:dialog>    
+		</h:form>
+	</h:body>
+      
+</html>

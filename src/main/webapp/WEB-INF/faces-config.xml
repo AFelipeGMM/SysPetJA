@@ -60,4 +60,18 @@
             <to-view-id>/pagManterServico.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
+    
+    <managed-bean>
+        <managed-bean-name>scheduleViewMB</managed-bean-name>
+        <managed-bean-class>bean.ScheduleView</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    
+    <navigation-rule>
+        <from-view-id>/newAgendamento.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>scheduleView</from-outcome>
+            <to-view-id>/newAgendamento.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
 </faces-config>
