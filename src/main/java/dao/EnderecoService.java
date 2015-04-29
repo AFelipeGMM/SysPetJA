@@ -2,7 +2,10 @@ package dao;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityNotFoundException;
 
+import dao.exceptions.NonexistentEntityException;
+import models.Cliente;
 import models.Endereco;
 
 public class EnderecoService {
@@ -63,5 +66,28 @@ public class EnderecoService {
 	 * */
 	public EntityManagerFactory getEMF() {
 		return this.emf;
+	}
+
+	public void destroy(long idEnd) throws NonexistentEntityException {
+		// TODO Auto-generated method stub
+		EntityManager em = null;
+        
+        try {
+            em = emf.createEntityManager();
+            em.getTransaction().begin();
+            Endereco endereco;
+            try {
+                endereco = em.getReference(Endereco.class, idEnd);
+                endereco.getId();
+            } catch (EntityNotFoundException enfe) {
+                throw new NonexistentEntityException("The endereco com id " + idEnd + " nao existe.", enfe);
+            }
+            em.remove(endereco);
+            em.getTransaction().commit();
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
 	}
 }

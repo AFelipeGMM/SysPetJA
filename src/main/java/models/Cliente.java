@@ -2,11 +2,16 @@
 
 package models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Cliente extends Pessoa {
+import javax.persistence.Entity;
 
+@Entity
+public class Cliente extends Pessoa implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	private List<Animal> animaisDeEstimacao;
 	
 	public Cliente() {

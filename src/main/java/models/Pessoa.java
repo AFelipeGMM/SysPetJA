@@ -1,11 +1,22 @@
 /**
- * @author André Felipe
+ * @author Andr
  * */
 
 package models;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Pessoa {
 	
+private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
 	private String nome;
 	private long cpf;
 	private Endereco endereco;
@@ -64,5 +75,26 @@ public class Pessoa {
 	 * */
 	public Endereco getEndereco() {
 		return this.endereco;
+	}
+
+	/**
+	 * @return the serialversionuid
+	 */
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	/**
+	 * @return the id
+	 */
+	public long getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(long id) {
+		this.id = id;
 	}
 }
