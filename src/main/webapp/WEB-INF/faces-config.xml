@@ -32,4 +32,32 @@
             <to-view-id>pagCadastroCliente.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
+    
+    <managed-bean>
+        <managed-bean-name>funcionarioMB</managed-bean-name>
+        <managed-bean-class>bean.FuncionarioMB</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    
+    <navigation-rule>
+        <from-view-id>/pagManterFuncionario.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>pagManterFuncionario</from-outcome>
+            <to-view-id>/pagManterFuncionario.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <managed-bean>
+        <managed-bean-name>servicoMB</managed-bean-name>
+        <managed-bean-class>bean.ServicoMB</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    
+    <navigation-rule>
+        <from-view-id>/pagManterServico.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>pagManterServico</from-outcome>
+            <to-view-id>/pagManterServico.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
 </faces-config>
