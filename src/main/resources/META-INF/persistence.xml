@@ -7,6 +7,7 @@
         
         <class>models.Endereco</class>
         <class>models.Funcionario</class>
+        <class>models.Cliente</class>
         <class>models.Pessoa</class>
 
         <properties>

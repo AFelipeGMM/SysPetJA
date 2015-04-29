@@ -1,14 +1,16 @@
 /**
- * @author André Felipe
+ * @author Andr
  * */
 
 package models;
 
 import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
 
 @Entity
 public class Pessoa implements Serializable{
@@ -27,13 +29,6 @@ public class Pessoa implements Serializable{
 	 * @param null
 	 * */
 	public Pessoa() {		
-	}
-	
-	public void setId(long id) {
-		this.id = id;
-	}
-	public long getId() {
-		return this.id;
 	}
 	
 	/**
@@ -83,5 +78,26 @@ public class Pessoa implements Serializable{
 	 * */
 	public Endereco getEndereco() {
 		return this.endereco;
+	}
+
+	/**
+	 * @return the serialversionuid
+	 */
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	/**
+	 * @return the id
+	 */
+	public long getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(long id) {
+		this.id = id;
 	}
 }
