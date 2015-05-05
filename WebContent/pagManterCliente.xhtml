@@ -29,6 +29,7 @@
                         <p:menuitem value="Pesquisar" />
                         <p:menuitem value="Cadastrar" url="/faces/pagManterServico.xhtml"/>
                     </p:submenu>
+                    <p:menuitem value="Visão cliente" url="/faces/pagCadastroCliente.xhtml"  />
                 </p:menubar>
             </p:layoutUnit>
             </h:form>
@@ -61,7 +62,7 @@
 						
 						<h:panelGrid columns="3">
 							<p:commandButton value="GRAVAR" action="#{clienteMB.salvar()}" ajax="false"/>
-	                        <p:commandButton value="LIMPAR CAMPOS" type="reset"/>
+	                        <p:commandButton value="CANCELAR" type="reset"/>
 	                        <p:commandButton value="EXCLUIR" action="clienteMB.excluir(cliente.id, cliente.endereco.id)" ajax="false"/>
 						</h:panelGrid>
 					</p:panel>

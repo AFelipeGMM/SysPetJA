@@ -33,7 +33,7 @@
                     <p:submenu label="Servico" >
                         <p:menuitem value="Pesquisar" />
                         <p:menuitem value="Cadastrar" url="/faces/pagManterServico.xhtml"/>
-                    </p:submenu>
+                    </p:submenu> 
                 </p:menubar>
             </p:layoutUnit>
             </h:form>
@@ -48,7 +48,7 @@
                                 <p:inputText id="valor" value="#{servicoMB.servico.valor}" maxlength="50"/>                                                       
 	
                                 <p:commandButton value="GRAVAR" action="#{servicoMB.salvar()}" ajax="false"/>
-                                <p:commandButton value="LIMPAR" type="reset"/>
+                                <p:commandButton value="CANCELAR" type="reset"/>
                             </h:panelGrid>
                         </p:panel>
                     </h:panelGrid>
