@@ -6,9 +6,10 @@
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         
         <class>models.Endereco</class>
-        <class>models.Funcionario</class>
         <class>models.Cliente</class>
         <class>models.Pessoa</class>
+        <class>models.Funcionario</class>
+        <class>models.Servico</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>

@@ -1,0 +1,78 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+	<h:head>
+		<title>SysPetJA - Manter Funcionário</title>
+	</h:head>
+	
+	<h:body>
+	<h:form>
+		<p:layoutUnit position="top" >
+            <p:menubar>  
+                 <p:menuitem value="Início" url="" icon="ui-icon-home" />  
+                    <p:submenu label="Cliente" >
+                        <p:menuitem value="Pesquisar" url="/faces/pagPesquisarCliente.xhtml"/>
+                        <p:menuitem value="Cadastrar" url="/faces/pagManterCliente.xhtml"/>
+                    </p:submenu>
+                    <p:submenu label="Funcionario" >
+                        <p:menuitem value="Pesquisar" />
+                        <p:menuitem value="Cadastrar" url="/faces/pagManterFuncionario.xhtml"/>
+                    </p:submenu>
+                    <p:submenu label="Agendamento" >
+                    	<p:menuitem value="Confirmar agendas"/>
+                        <p:menuitem value="Pesquisar" />
+                        <p:menuitem value="Cadastrar" url="/faces/newAgendamento.xhtml"/>
+                    </p:submenu>
+                    <p:submenu label="Servico" >
+                        <p:menuitem value="Pesquisar" />
+                        <p:menuitem value="Cadastrar" url="/faces/pagManterServico.xhtml"/>
+                    </p:submenu>
+                </p:menubar>
+            </p:layoutUnit>
+            </h:form>
+		<center>
+			<h:form id="formCadastro">
+				<h:panelGrid>
+					<p:panel header="Cadastrar Funcionário">
+						<h:panelGrid columns="2">
+							<h:outputText value="Nome: "/>
+							<p:inputText id="funcNome" value="#{funcionarioMB.funcionario.nome}" maxlength="50"/>
+							<h:outputText value="CPF: "/>
+							<p:inputText id="funcCPF" value="#{funcionarioMB.funcionario.CPF}" maxlength="50"/>
+							
+							<p:separator/><p:separator/>
+							
+							<h:outputText value="Cargo: "/>
+							<p:inputText id="funcCargo" value="#{funcionarioMB.funcionario.cargo}" maxlength="50"/>
+							<h:outputText value="Salário: "/>
+							<p:inputText id="funcSal" value="#{funcionarioMB.funcionario.salario}" maxlength="50"/>
+							
+							<p:separator/><p:separator/>
+							
+							<h:outputText value="Rua: "/>
+							<p:inputText id="funcRua" value="#{funcionarioMB.endereco.rua}" maxlength="50"/>
+							<h:outputText value="Número: "/>
+							<p:inputText id="funcNum" value="#{funcionarioMB.endereco.numero}" maxlength="50"/>
+							<h:outputText value="Bairro: "/>
+							<p:inputText id="funcBairro" value="#{funcionarioMB.endereco.bairro}" maxlength="50"/>
+							<h:outputText value="Cidade: "/>
+							<p:inputText id="funcCidade" value="#{funcionarioMB.endereco.cidade}" maxlength="50"/>
+							<h:outputText value="Estado: "/>
+							<p:inputText id="funcEstado" value="#{funcionarioMB.endereco.UF}" maxlength="50"/>
+						</h:panelGrid>
+						
+						<p:separator/>
+						
+						<h:panelGrid columns="2">
+							<p:commandButton value="SALVAR" action="#{funcionarioMB.salvar()}" ajax="false"/>
+	                        <p:commandButton value="CANCELAR" type="reset"/>
+						</h:panelGrid>
+					</p:panel>
+				</h:panelGrid>
+			</h:form>
+		</center>
+	</h:body>
+      
+</html>

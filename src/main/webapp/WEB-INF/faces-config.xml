@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config
+    xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
+    version="2.2">
+    
+    <managed-bean>
+        <managed-bean-name>enderecoMB</managed-bean-name>
+        <managed-bean-class>bean.EnderecoMB</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    
+    <navigation-rule>
+        <from-view-id>/manterEndereco.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>manterEndereco</from-outcome>
+            <to-view-id>/manterEndereco.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+	<managed-bean>
+        <managed-bean-name>clienteMB</managed-bean-name>
+        <managed-bean-class>bean.ClienteMB</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    
+    <navigation-rule>
+        <from-view-id>/pagCadastroCliente.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>pagCadastroCliente</from-outcome>
+            <to-view-id>pagCadastroCliente.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <managed-bean>
+        <managed-bean-name>funcionarioMB</managed-bean-name>
+        <managed-bean-class>bean.FuncionarioMB</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    
+    <navigation-rule>
+        <from-view-id>/pagManterFuncionario.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>pagManterFuncionario</from-outcome>
+            <to-view-id>/pagManterFuncionario.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <managed-bean>
+        <managed-bean-name>servicoMB</managed-bean-name>
+        <managed-bean-class>bean.ServicoMB</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    
+    <navigation-rule>
+        <from-view-id>/pagManterServico.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>pagManterServico</from-outcome>
+            <to-view-id>/pagManterServico.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <managed-bean>
+        <managed-bean-name>scheduleViewMB</managed-bean-name>
+        <managed-bean-class>bean.ScheduleView</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    
+    <navigation-rule>
+        <from-view-id>/newAgendamento.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>scheduleView</from-outcome>
+            <to-view-id>/newAgendamento.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+</faces-config>

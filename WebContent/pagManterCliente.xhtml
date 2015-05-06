@@ -1,0 +1,137 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+	<h:head>
+		<title>SysPetJA - Manter Clientes</title>
+	</h:head>
+	
+	<h:body>
+		<h:form>
+		<p:layoutUnit position="top" >
+            <p:menubar>  
+                 <p:menuitem value="Início" url="" icon="ui-icon-home" />  
+                    <p:submenu label="Cliente" >
+                        <p:menuitem value="Pesquisar" url="/faces/pagPesquisarCliente.xhtml"/>
+                        <p:menuitem value="Cadastrar" url="/faces/pagManterCliente.xhtml"/>
+                    </p:submenu>
+                    <p:submenu label="Funcionario" >
+                        <p:menuitem value="Pesquisar" />
+                        <p:menuitem value="Cadastrar" url="/faces/pagManterFuncionario.xhtml"/>
+                    </p:submenu>
+                    <p:submenu label="Agendamento" >
+                    	<p:menuitem value="Confirmar agendas"/>
+                        <p:menuitem value="Pesquisar" />
+                        <p:menuitem value="Cadastrar" url="/faces/newAgendamento.xhtml"/>
+                    </p:submenu>
+                    <p:submenu label="Servico" >
+                        <p:menuitem value="Pesquisar" />
+                        <p:menuitem value="Cadastrar" url="/faces/pagManterServico.xhtml"/>
+                    </p:submenu>
+                    <p:menuitem value="Visão cliente" url="/faces/pagCadastroCliente.xhtml"  />
+                </p:menubar>
+            </p:layoutUnit>
+            </h:form>
+	
+		<center>
+			<h:form id="formCadastro">
+				<h:panelGrid>
+					<p:panel header="Cadastrar Cliente">
+						<h:panelGrid columns="2" width="500">
+							<h:outputText value="Nome: "/>
+							<p:inputText id="clienteNome" value="#{clienteMB.cliente.nome}" maxlength="50" />
+							<h:outputText value="CPF: "/>
+							<p:inputMask id="clienteCPF" value="#{clienteMB.cliente.CPF}" maxlength="50"/>
+							
+							<p:separator/><p:separator/>
+							
+							<h:outputText value="Rua: "/>
+							<p:inputText id="clienteRua" value="#{clienteMB.endereco.rua}" maxlength="50"/>
+							<h:outputText value="Número: "/>
+							<p:inputText id="clienteNum" value="#{clienteMB.endereco.numero}" maxlength="50"/>
+							<h:outputText value="Bairro: "/>
+							<p:inputText id="clienteBairro" value="#{clienteMB.endereco.bairro}" maxlength="50"/>
+							<h:outputText value="Cidade: "/>
+							<p:inputText id="clienteCidade" value="#{clienteMB.endereco.cidade}" maxlength="50"/>
+							<h:outputText value="Estado: "/>
+							<p:inputText id="clienteEstado" value="#{clienteMB.endereco.UF}" maxlength="50"/>
+						</h:panelGrid>
+						
+						<p:separator/>
+						
+						<h:panelGrid columns="3">
+							<p:commandButton value="GRAVAR" action="#{clienteMB.salvar()}" ajax="false"/>
+	                        <p:commandButton value="CANCELAR" type="reset"/>
+	                        <p:commandButton value="EXCLUIR" action="clienteMB.excluir(cliente.id, cliente.endereco.id)" ajax="false"/>
+						</h:panelGrid>
+					</p:panel>
+				</h:panelGrid>
+			</h:form>
+		</center>
+				
+				<!--Formularios de pesquisa-->
+        <hr></hr>
+	<p:panel header="Clientes" toggleable="true" toggleTitle="Minimizar/Maximizar">
+	
+        <p:dataTable value="#{clienteMB.clientes}" emptyMessage="Nenhum cliente"
+                     paginatorTemplate="{PreviousPageLink} {CurrentPageReport}
+                     {PageLinks} {NextPageLink} {RowsPerPageDropdown}"
+                     paginator="true" rows="5" rowsPerPageTemplate="5,10,20"
+                     var="cliente" id="tabClientes">
+            <f:facet name="header">  
+                <h:outputText value="Relação cliente" /> 
+            </f:facet>
+
+            <p:column>
+                <f:facet name="header">  
+                    <h:outputText value="Cliente"/> 
+                </f:facet>
+                <h:form>
+                    <center>
+                        <p:commandLink ajax="false" value="#{cliente.nome}" action="#{clienteMB.carregar(cliente)}"/>
+                    </center>
+                    
+                </h:form>
+            </p:column>
+
+            <p:column>
+                <f:facet name="header">  
+                    <h:outputText value="CPF"/> 
+                </f:facet>
+                <h:form>
+                    <center>
+                       <p:commandLink ajax="false" value="#{cliente.CPF}" action="#{clienteMB.carregar(cliente)}"/>
+                    </center>
+                    
+                </h:form>
+            </p:column>
+            
+            <p:column>
+                <f:facet name="header">  
+                    <h:outputText value="Cidade"/> 
+                </f:facet>
+                <h:form>
+                    <center>
+                       <p:commandLink ajax="false" value="#{cliente.endereco.cidade}" action="#{clienteMB.carregar(cliente)}"/>
+                    </center>
+                    
+                </h:form>
+            </p:column>
+
+            <p:column>
+                <f:facet name="header">  
+                    <h:outputText value="Excluir"/> 
+                </f:facet>
+                <h:form>
+                    <p:commandButton ajax="false" image="ui-icon-trash" action="#{clienteMB.excluir(cliente.id, cliente.endereco.id)}"/>
+                </h:form>
+            </p:column>
+        </p:dataTable>
+        
+        </p:panel>
+        <hr></hr>
+
+	</h:body>
+      
+</html>

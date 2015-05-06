@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>SisPetJ.A. - Manter os Servicos</title>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+        <h:form>
+		<p:layoutUnit position="top" >
+            <p:menubar>  
+                 <p:menuitem value="Início" url="" icon="ui-icon-home" />  
+                    <p:submenu label="Cliente" >
+                        <p:menuitem value="Pesquisar" url="/faces/pagPesquisarCliente.xhtml"/>
+                        <p:menuitem value="Cadastrar" url="/faces/pagManterCliente.xhtml"/>
+                    </p:submenu>
+                    <p:submenu label="Funcionario" >
+                        <p:menuitem value="Pesquisar" />
+                        <p:menuitem value="Cadastrar" url="/faces/pagManterFuncionario.xhtml"/>
+                    </p:submenu>
+                    <p:submenu label="Agendamento" >
+                    	<p:menuitem value="Confirmar agendas"/>
+                        <p:menuitem value="Pesquisar" />
+                        <p:menuitem value="Cadastrar" url="/faces/newAgendamento.xhtml"/>
+                    </p:submenu>
+                    <p:submenu label="Servico" >
+                        <p:menuitem value="Pesquisar" />
+                        <p:menuitem value="Cadastrar" url="/faces/pagManterServico.xhtml"/>
+                    </p:submenu> 
+                </p:menubar>
+            </p:layoutUnit>
+            </h:form>
+            <center>
+                <h:form id="formulario">
+                    <h:panelGrid>
+                        <p:panel header="Cadastrar servico">
+                            <h:panelGrid columns="2">
+                                <h:outputText value="Informe o tipo de Servico: "/>
+                                <p:inputText id="tipo" value="#{servicoMB.servico.tipo}" maxlength="50"/>
+                                <h:outputText value="Taxa do Servico: "/>  
+                                <p:inputText id="valor" value="#{servicoMB.servico.valor}" maxlength="50"/>                                                       
+	
+                                <p:commandButton value="GRAVAR" action="#{servicoMB.salvar()}" ajax="false"/>
+                                <p:commandButton value="CANCELAR" type="reset"/>
+                            </h:panelGrid>
+                        </p:panel>
+                    </h:panelGrid>
+                </h:form>
+            </center>
+        </h:body>
+
+    </f:view>
+</html>
