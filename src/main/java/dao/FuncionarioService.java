@@ -113,7 +113,7 @@ public class FuncionarioService {
         EntityManager em = emf.createEntityManager();
 
         TypedQuery<Funcionario> q;
-        q = em.createQuery("select p from Cliente p where p.nome like :nome",
+        q = em.createQuery("select p from Funcionario p where p.nome like :nome",
                 Funcionario.class);
         q.setParameter("nome", "%" + nome + "%");
 

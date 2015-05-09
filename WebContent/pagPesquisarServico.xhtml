@@ -1,0 +1,88 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+	<h:head>
+		<title>SysPetJA - Pesquisar Servicos</title>
+	</h:head>
+	
+	<h:body>
+		
+		<h:form>
+		<p:layoutUnit position="top" >
+            <p:menubar>  
+                 <p:menuitem value="Início" url="" icon="ui-icon-home" />  
+                    <p:submenu label="Cliente" >
+                        <p:menuitem value="Pesquisar" url="/faces/pagPesquisarCliente.xhtml"/>
+                        <p:menuitem value="Cadastrar" url="/faces/pagManterCliente.xhtml"/>
+                    </p:submenu>
+                    <p:submenu label="Funcionario" >
+                        <p:menuitem value="Pesquisar" url="/faces/pagPesquisarFuncionario.xhtml"/>
+                        <p:menuitem value="Cadastrar" url="/faces/pagManterFuncionario.xhtml"/>
+                    </p:submenu>
+                    <p:submenu label="Agendamento" >
+                    	<p:menuitem value="Confirmar agendas"/>
+                        <p:menuitem value="Pesquisar" />
+                        <p:menuitem value="Cadastrar" url="/faces/newAgendamento.xhtml"/>
+                    </p:submenu>
+                    <p:submenu label="Servico" >
+                        <p:menuitem value="Pesquisar" url="/faces/pagPesquisarServico.xhtml"/>
+                        <p:menuitem value="Cadastrar" url="/faces/pagManterServico.xhtml"/>
+                    </p:submenu>
+                    <p:menuitem value="Visão cliente" url="/faces/pagCadastroCliente.xhtml"  />
+                </p:menubar>
+            </p:layoutUnit>
+            </h:form>
+        
+       <p:panel header="Servicos" toggleable="true" toggleTitle="Minimizar/Maximizar">
+	
+        <p:dataTable value="#{servicoMB.servicos}" emptyMessage="Nenhum servico"
+                     paginatorTemplate="{PreviousPageLink} {CurrentPageReport}
+                     {PageLinks} {NextPageLink} {RowsPerPageDropdown}"
+                     paginator="true" rows="5" rowsPerPageTemplate="5,10,20"
+                     var="servico" id="tabServicos">
+            <f:facet name="header">  
+                <h:outputText value="Relação servico" /> 
+            </f:facet>
+
+            <p:column>
+                <f:facet name="header">  
+                    <h:outputText value="Servico"/> 
+                </f:facet>
+                <h:form>
+                    <center>
+                        <p:commandLink ajax="false" value="#{servico.tipo}" action="#{servicoMB.carregar(servico)}"/>
+                    </center>
+                    
+                </h:form>
+            </p:column>
+
+            <p:column>
+                <f:facet name="header">  
+                    <h:outputText value="Valor"/> 
+                </f:facet>
+                <h:form>
+                    <center>
+                       <p:commandLink ajax="false" value="#{servico.valor}" action="#{servicoMB.carregar(servico)}"/>
+                    </center>
+                    
+                </h:form>
+            </p:column>
+            
+
+            <p:column>
+                <f:facet name="header">  
+                    <h:outputText value="Excluir"/> 
+                </f:facet>
+                <h:form>
+                    <p:commandButton ajax="false" image="ui-icon-trash" action="#{servicoMB.excluir(servico.id)}"/>
+                </h:form>
+            </p:column>
+        </p:dataTable>
+        
+        </p:panel>
+        
+    </h:body>
+    
+    </html>

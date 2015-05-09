@@ -8,30 +8,32 @@
 	</h:head>
 	
 	<h:body>
+		
 		<h:form>
-		  <p:layoutUnit position="top" >
+		<p:layoutUnit position="top" >
             <p:menubar>  
-                 <p:menuitem value="Início" icon="ui-icon-home" />  
+                 <p:menuitem value="Início" url="" icon="ui-icon-home" />  
                     <p:submenu label="Cliente" >
                         <p:menuitem value="Pesquisar" url="/faces/pagPesquisarCliente.xhtml"/>
                         <p:menuitem value="Cadastrar" url="/faces/pagManterCliente.xhtml"/>
                     </p:submenu>
                     <p:submenu label="Funcionario" >
-                        <p:menuitem value="Pesquisar" />
-                        <p:menuitem value="Cadastrar" />
+                        <p:menuitem value="Pesquisar" url="/faces/pagPesquisarFuncionario.xhtml"/>
+                        <p:menuitem value="Cadastrar" url="/faces/pagManterFuncionario.xhtml"/>
                     </p:submenu>
                     <p:submenu label="Agendamento" >
                     	<p:menuitem value="Confirmar agendas"/>
                         <p:menuitem value="Pesquisar" />
-                        <p:menuitem value="Cadastrar" />
+                        <p:menuitem value="Cadastrar" url="/faces/newAgendamento.xhtml"/>
                     </p:submenu>
-                    <p:submenu label="Gerente" >
-                        <p:menuitem value="Conta" />
-                        <p:menuitem value="Sair" />
+                    <p:submenu label="Servico" >
+                        <p:menuitem value="Pesquisar" url="/faces/pagPesquisarServico.xhtml"/>
+                        <p:menuitem value="Cadastrar" url="/faces/pagManterServico.xhtml"/>
                     </p:submenu>
+                    <p:menuitem value="Visão cliente" url="/faces/pagCadastroCliente.xhtml"  />
                 </p:menubar>
             </p:layoutUnit>
-        </h:form>
+            </h:form>
         
        <p:panel header="Clientes" toggleable="true" toggleTitle="Minimizar/Maximizar">
 	

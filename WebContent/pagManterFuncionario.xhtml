@@ -8,7 +8,8 @@
 	</h:head>
 	
 	<h:body>
-	<h:form>
+	
+		<h:form>
 		<p:layoutUnit position="top" >
             <p:menubar>  
                  <p:menuitem value="Início" url="" icon="ui-icon-home" />  
@@ -17,7 +18,7 @@
                         <p:menuitem value="Cadastrar" url="/faces/pagManterCliente.xhtml"/>
                     </p:submenu>
                     <p:submenu label="Funcionario" >
-                        <p:menuitem value="Pesquisar" />
+                        <p:menuitem value="Pesquisar" url="/faces/pagPesquisarFuncionario.xhtml"/>
                         <p:menuitem value="Cadastrar" url="/faces/pagManterFuncionario.xhtml"/>
                     </p:submenu>
                     <p:submenu label="Agendamento" >
@@ -26,9 +27,10 @@
                         <p:menuitem value="Cadastrar" url="/faces/newAgendamento.xhtml"/>
                     </p:submenu>
                     <p:submenu label="Servico" >
-                        <p:menuitem value="Pesquisar" />
+                        <p:menuitem value="Pesquisar" url="/faces/pagPesquisarServico.xhtml"/>
                         <p:menuitem value="Cadastrar" url="/faces/pagManterServico.xhtml"/>
                     </p:submenu>
+                    <p:menuitem value="Visão cliente" url="/faces/pagCadastroCliente.xhtml"  />
                 </p:menubar>
             </p:layoutUnit>
             </h:form>
