@@ -33,7 +33,113 @@
             </p:layoutUnit>
         </h:form>
         
-        EM MANUTENÇÃO...
+       <p:panel header="Clientes" toggleable="true" toggleTitle="Minimizar/Maximizar">
+	
+        <p:dataTable value="#{clienteMB.clientes}" emptyMessage="Nenhum cliente"
+                     paginatorTemplate="{PreviousPageLink} {CurrentPageReport}
+                     {PageLinks} {NextPageLink} {RowsPerPageDropdown}"
+                     paginator="true" rows="5" rowsPerPageTemplate="5,10,20"
+                     var="cliente" id="tabClientes">
+            <f:facet name="header">  
+                <h:outputText value="Relação cliente" /> 
+            </f:facet>
+
+            <p:column>
+                <f:facet name="header">  
+                    <h:outputText value="Cliente"/> 
+                </f:facet>
+                <h:form>
+                    <center>
+                        <p:commandLink ajax="false" value="#{cliente.nome}" action="#{clienteMB.carregar(cliente)}"/>
+                    </center>
+                    
+                </h:form>
+            </p:column>
+
+            <p:column>
+                <f:facet name="header">  
+                    <h:outputText value="CPF"/> 
+                </f:facet>
+                <h:form>
+                    <center>
+                       <p:commandLink ajax="false" value="#{cliente.CPF}" action="#{clienteMB.carregar(cliente)}"/>
+                    </center>
+                    
+                </h:form>
+            </p:column>
+            
+            <p:column>
+                <f:facet name="header">  
+                    <h:outputText value="Rua"/> 
+                </f:facet>
+                <h:form>
+                    <center>
+                       <p:commandLink ajax="false" value="#{cliente.endereco.rua}" action="#{clienteMB.carregar(cliente)}"/>
+                    </center>
+                    
+                </h:form>
+            </p:column>
+            
+            <p:column>
+                <f:facet name="header">  
+                    <h:outputText value="Numero"/> 
+                </f:facet>
+                <h:form>
+                    <center>
+                       <p:commandLink ajax="false" value="#{cliente.endereco.numero}" action="#{clienteMB.carregar(cliente)}"/>
+                    </center>
+                    
+                </h:form>
+            </p:column>
+            
+            <p:column>
+                <f:facet name="header">  
+                    <h:outputText value="Bairro"/> 
+                </f:facet>
+                <h:form>
+                    <center>
+                       <p:commandLink ajax="false" value="#{cliente.endereco.bairro}" action="#{clienteMB.carregar(cliente)}"/>
+                    </center>
+                    
+                </h:form>
+            </p:column>
+            
+            <p:column>
+                <f:facet name="header">  
+                    <h:outputText value="Cidade"/> 
+                </f:facet>
+                <h:form>
+                    <center>
+                       <p:commandLink ajax="false" value="#{cliente.endereco.cidade}" action="#{clienteMB.carregar(cliente)}"/>
+                    </center>
+                    
+                </h:form>
+            </p:column>
+            
+            <p:column>
+                <f:facet name="header">  
+                    <h:outputText value="Estado"/> 
+                </f:facet>
+                <h:form>
+                    <center>
+                       <p:commandLink ajax="false" value="#{cliente.endereco.UF}" action="#{clienteMB.carregar(cliente)}"/>
+                    </center>
+                    
+                </h:form>
+            </p:column>
+
+            <p:column>
+                <f:facet name="header">  
+                    <h:outputText value="Excluir"/> 
+                </f:facet>
+                <h:form>
+                    <p:commandButton ajax="false" image="ui-icon-trash" action="#{clienteMB.excluir(cliente.id, cliente.endereco.id)}"/>
+                </h:form>
+            </p:column>
+        </p:dataTable>
+        
+        </p:panel>
+        
     </h:body>
     
     </html>
