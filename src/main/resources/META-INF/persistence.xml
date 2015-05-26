@@ -10,6 +10,7 @@
         <class>models.Pessoa</class>
         <class>models.Funcionario</class>
         <class>models.Servico</class>
+        <class>models.Animal</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>

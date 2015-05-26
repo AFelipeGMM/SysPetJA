@@ -48,8 +48,10 @@
                                 <h:outputText value="Informe o tipo de Servico: "/>
                                 <p:inputText id="tipo" value="#{servicoMB.servico.tipo}" maxlength="50"/>
                                 <h:outputText value="Taxa do Servico: "/>  
-                                <p:inputText id="valor" value="#{servicoMB.servico.valor}" maxlength="50"/>                                                       
-	
+                                <p:inputText id="valor" value="#{servicoMB.servico.valor}" maxlength="50"/>
+                                 <h:outputText value="Duração do servico: "/>  
+                                <p:inputText id="duracao" value="#{servicoMB.servico.duracao}" maxlength="50"/>                                                       
+						<p:separator></p:separator>
                                 <p:commandButton value="GRAVAR" action="#{servicoMB.salvar()}" ajax="false"/>
                                 <p:commandButton value="CANCELAR" type="reset"/>
                             </h:panelGrid>

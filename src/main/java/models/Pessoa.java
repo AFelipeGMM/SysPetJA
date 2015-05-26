@@ -20,6 +20,8 @@ private static final long serialVersionUID = 1L;
 	private String nome;
 	private long cpf;
 	private Endereco endereco;
+	private String email;
+	private String senha;
 	
 	/**
 	 * Metodo construtor da classe Pessoa
@@ -96,5 +98,33 @@ private static final long serialVersionUID = 1L;
 	 */
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	/**
+	 * @return the email
+	 */
+	public String getEmail() {
+		return email;
+	}
+
+	/**
+	 * @param email the email to set
+	 */
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	/**
+	 * @return the senha
+	 */
+	public String getSenha() {
+		return senha;
+	}
+
+	/**
+	 * @param senha the senha to set
+	 */
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 }

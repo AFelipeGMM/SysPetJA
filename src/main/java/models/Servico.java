@@ -20,6 +20,7 @@ public class Servico implements Serializable {
 	private long id;
 	private String tipo;
 	private double valor;
+	private int duracao;
 	
 	/**
 	 * */
@@ -51,5 +52,21 @@ public class Servico implements Serializable {
 	
 	public double getValor() {
 		return this.valor;
+	}
+
+
+	/**
+	 * @return the duracao
+	 */
+	public int getDuracao() {
+		return duracao;
+	}
+
+
+	/**
+	 * @param duracao the duracao to set
+	 */
+	public void setDuracao(int duracao) {
+		this.duracao = duracao;
 	}
 }

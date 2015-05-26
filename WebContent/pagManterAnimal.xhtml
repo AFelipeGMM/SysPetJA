@@ -1,0 +1,94 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+	<h:head>
+		<title>SysPetJA - Manter Clientes</title>
+	</h:head>
+	
+	<h:body>
+		<h:form>
+		<p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+			<p:outputLabel value="Digite seu email: " />
+			<p:inputText id="emailCliente" required="true" />
+        	<p:commandButton value="Confirmar" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+    	</p:confirmDialog>
+		
+		<p:layoutUnit position="top" >
+            <p:menubar>  
+                 <p:menuitem value="Início" url="" icon="ui-icon-home" />  
+                    <p:submenu label="Cliente" >
+                        <p:menuitem value="Pesquisar" url="/faces/pagPesquisarCliente.xhtml"/>
+                        <p:menuitem value="Cadastrar" url="/faces/pagManterCliente.xhtml"/>
+                    </p:submenu>
+                    <p:submenu label="Funcionario" >
+                        <p:menuitem value="Pesquisar" url="/faces/pagPesquisarFuncionario.xhtml"/>
+                        <p:menuitem value="Cadastrar" url="/faces/pagManterFuncionario.xhtml"/>
+                    </p:submenu>
+                    <p:submenu label="Agendamento" >
+                    	<p:menuitem value="Confirmar agendas"/>
+                        <p:menuitem value="Pesquisar" />
+                        <p:menuitem value="Cadastrar" url="/faces/newAgendamento.xhtml"/>
+                    </p:submenu>
+                    <p:submenu label="Servico" >
+                        <p:menuitem value="Pesquisar" url="/faces/pagPesquisarServico.xhtml"/>
+                        <p:menuitem value="Cadastrar" url="/faces/pagManterServico.xhtml"/>
+                    </p:submenu>
+                    <p:menuitem value="Visão cliente" url="/faces/pagCadastroCliente.xhtml"  />
+                </p:menubar>
+            </p:layoutUnit>
+            </h:form>
+	
+		<center>
+			<h:form id="formCadastro">
+				<h:panelGrid>
+					<p:panel header="Dados do animal">
+						<h:panelGrid columns="2" width="500">
+							<h:outputText value="Nome: "/>
+							<p:inputText id="animalNome" value="#{animalMB.animal.nome}" maxlength="50" />
+							<h:outputText value="Especie: "/>
+							<p:inputMask id="especie" value="#{animalMB.animal.especie}" maxlength="50"/>
+							<h:outputText value="Raca: "/>
+							<p:inputText id="raca" value="#{animalMB.animal.raca}" maxlength="50"/>
+							
+							<h:outputText value="Porte"/>
+							<p:selectOneMenu id="porte" value="#{animalMB.animal.porte}" style="width:200px" required="true">
+            					<f:selectItem itemLabel="Selecionar" itemValue="" />
+					            <f:selectItem itemLabel="Pequeno" itemValue="Pequeno" />
+					            <f:selectItem itemLabel="Medio" itemValue="Medio" />
+					            <f:selectItem itemLabel="Grande" itemValue="Grande" />
+        					</p:selectOneMenu >
+
+
+							<h:outputText value="Peso: "/>
+							<p:inputText id="peso" value="#{animalMB.animal.peso}" maxlength="50"/>
+							
+							<p:outputLabel for="dataDeNasc" value="Data de nascimento:" />
+        					<p:calendar id="dataDeNasc" value="#{animalMB.animal.dataDeNasc}" locale="de" navigator="true" pattern="dd-MM-yyyy" />
+ 
+							
+							
+							<h:outputText value="Sexo: "/>
+							<p:selectOneRadio id="console" value="#{animalMB.animal.sexo}">
+					            <f:selectItem itemLabel="Masculino" itemValue="Masculino" />
+					            <f:selectItem itemLabel="Feminino" itemValue="Feminino" />
+					        </p:selectOneRadio>
+						</h:panelGrid>
+						
+						<p:separator/>
+						
+						<h:panelGrid columns="2">
+							<p:commandButton value="GRAVAR" action="#{animalMB.salvar()}" ajax="false"/>
+	                        <p:commandButton value="CANCELAR" type="reset"/>
+	                       </h:panelGrid>
+					</p:panel>
+				</h:panelGrid>
+			</h:form>
+		</center>
+				
+        <hr></hr>
+
+	</h:body>
+      
+</html>

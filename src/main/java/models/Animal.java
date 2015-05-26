@@ -4,8 +4,30 @@
 
 package models;
 
-public class Animal {
+import java.io.Serializable;
+import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+@Entity
+public class Animal implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
+	
+	private String nome;
+	private String cor;
+	private double peso;
+	@Temporal(TemporalType.DATE)
+	private Date dataDeNasc;
 	private String raca;
 	private String especie;
 	private String porte;
@@ -81,5 +103,65 @@ public class Animal {
 	 * */
 	public String getSexo() {
 		return this.sexo;
+	}
+
+	/**
+	 * @return the nome
+	 */
+	public String getNome() {
+		return nome;
+	}
+
+	/**
+	 * @param nome the nome to set
+	 */
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	/**
+	 * @return the cor
+	 */
+	public String getCor() {
+		return cor;
+	}
+
+	/**
+	 * @param cor the cor to set
+	 */
+	public void setCor(String cor) {
+		this.cor = cor;
+	}
+
+	/**
+	 * @return the peso
+	 */
+	public double getPeso() {
+		return peso;
+	}
+
+	/**
+	 * @param peso the peso to set
+	 */
+	public void setPeso(double peso) {
+		this.peso = peso;
+	}
+
+	/**
+	 * @return the dataDeNasc
+	 */
+	public Date getDataDeNasc() {
+		return dataDeNasc;
+	}
+
+	/**
+	 * @param dataDeNasc the dataDeNasc to set
+	 */
+	public void setDataDeNasc(Date dataDeNasc) {
+		this.dataDeNasc = dataDeNasc;
+	}
+	
+	public long getId(){
+		return id;
 	}
 }
