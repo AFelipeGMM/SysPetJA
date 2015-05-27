@@ -1,0 +1,97 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>SysPetJA - Inicio de Cliente</title>
+</h:head>
+
+<h:body>
+
+   <h:form id="formPesqClientes">
+                <h:panelGrid columns="3">
+                    <h:outputLabel value="Nome do cliente:"/>
+                    <p:inputText id="campoPesqNome" value="#{clienteMB.pesquisa}"/>
+                    <p:message for="formPesqClientes"/>
+                </h:panelGrid>
+                <p:commandButton value="Confirmar" ajax="false"
+                                 action="#{clienteMB.pesquisarPorNome()}" image="ui-icon-search"/>
+            </h:form>
+
+	<h:form>
+		
+		
+		<p:menubar style="min-width:40px;min-height:20px;"/>
+		
+		<p:separator></p:separator>
+		
+		<p:layout >
+		
+ 
+    		<p:layoutUnit position="center">
+        
+        		<center>
+        		<h:panelGrid columns="3" width="800">
+    			<p:graphicImage url="http://www.esmobile.es/img/mdm/login.png"  width="200px" height="200px"/>
+    			
+    			<h:panelGrid columns="2" width="400" value="#{clienteMB.clientes}" emptyMessage="Nenhum cliente">
+    			<p:dataTable value="#{clienteMB.clientes}" emptyMessage="Nenhum cliente"
+                     var="cliente" id="tabClientes">
+
+            <p:column>
+                <h:form>
+                    <center>
+                    <h:panelGrid columns="2">
+                    	<h:outputText value="nome: "></h:outputText>
+                        <p:commandLink ajax="false" value="#{cliente.nome}" action="#{clienteMB.carregar(cliente)}"/> 
+                        <h:outputText value="CPF: "></h:outputText>
+                        <p:commandLink ajax="false" value="#{cliente.CPF}" action="#{clienteMB.carregar(cliente)}"/> 
+                        <h:outputText value="Rua:"></h:outputText>
+                        <p:commandLink ajax="false" value="#{cliente.endereco.rua}" action="#{clienteMB.carregar(cliente)}"/> 
+                        <h:outputText value="Bairro:"></h:outputText>
+                        <p:commandLink ajax="false" value="#{cliente.endereco.bairro}" action="#{clienteMB.carregar(cliente)}"/> 
+                        <h:outputText value="Cidade:"></h:outputText>
+                        <p:commandLink ajax="false" value="#{cliente.endereco.cidade}" action="#{clienteMB.carregar(cliente)}"/> 
+                        <h:outputText value="Email:"></h:outputText>
+                        <p:commandLink ajax="false" value="#{cliente.email}" action="#{clienteMB.carregar(cliente)}"/> 
+                        
+                    </h:panelGrid>
+                    </center>
+                    
+                </h:form>
+            </p:column>
+            
+            </p:dataTable>
+    			
+    			</h:panelGrid>
+    			
+    			<p:commandButton value="editar"></p:commandButton>
+    				 
+				</h:panelGrid>
+				
+				</center>
+					    		
+    			<p:separator></p:separator>
+    			
+    			<p:tabMenu activeIndex="#{param.i}">
+				    <p:menuitem value="Seus animais" outcome="/faces/pagInicialClienteEPets.xhtml" icon="ui-icon-star">
+				        <f:param name="i" value="0" />
+				    </p:menuitem>
+				    <p:menuitem value="Agendamentos" outcome="/faces/pagInicialClienteEAgendas.xhtml" icon="ui-icon-search">
+				        <f:param name="i" value="1" />
+				    </p:menuitem>
+				    <p:menuitem value="Financeiro" outcome="/faces/pagInicialClienteEFinancas.xhtml"  icon="ui-icon-document">
+				        <f:param name="i" value="2" />
+				    </p:menuitem>
+				</p:tabMenu>
+    			
+    			
+
+    	</p:layoutUnit>
+    
+</p:layout>
+	</h:form>
+</h:body>
+
+</html>

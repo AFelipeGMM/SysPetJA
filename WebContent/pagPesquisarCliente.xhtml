@@ -142,6 +142,19 @@
         
         </p:panel>
         
+        <p:panel header="Pesquisar Cliente Por Nome"  toggleable="true" toggleTitle="Minimizar/Maximizar">
+            <h:form id="formPesqClientes">
+                <h:panelGrid columns="3">
+                    <h:outputLabel value="Nome do Cliente:"/>
+                    <p:inputText id="campoPesqNome" value="#{clienteMB.pesquisa}"/>
+                    <p:message for="formPesqClientes"/>
+                </h:panelGrid>
+                <p:commandButton value="Pesquisar" ajax="false"
+                                 action="#{clienteMB.pesquisarPorNome()}" image="ui-icon-search"/>
+            </h:form>
+        </p:panel>
+        <hr></hr>
+        
     </h:body>
     
     </html>

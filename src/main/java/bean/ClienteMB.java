@@ -12,10 +12,12 @@ import javax.faces.context.FacesContext;
 
 import org.primefaces.event.FlowEvent;
 
+import dao.AnimalService;
 import dao.ClienteService;
 import dao.EnderecoService;
 import dao.exceptions.NonexistentEntityException;
 import dao.util.JPAUtil;
+import models.Animal;
 import models.Cliente;
 import models.Endereco;
 
@@ -26,11 +28,21 @@ import models.Endereco;
 public class ClienteMB {
 	private Cliente cliente = new Cliente();
 	private Endereco endereco = new Endereco();
+	private Animal animal = new Animal();
 	public final ClienteService dao = new ClienteService(JPAUtil.EMF);
+	public final AnimalService daoAnimal = new AnimalService(JPAUtil.EMF);
 	public final EnderecoService daoEndereco = new EnderecoService(JPAUtil.EMF);
 	private String pesquisa;
 	private List<Cliente> clientes;
 	private boolean skip;
+	
+	public void setPesquisa(String pesquisa){
+		this.pesquisa = pesquisa;
+	}
+	
+	public String getPesquisa(){
+		return pesquisa;
+	}
 	
 	public Cliente getCliente() {
 		return cliente;
@@ -80,7 +92,9 @@ public class ClienteMB {
 	public void salvar(){
 		try {
 			daoEndereco.createEndereco(endereco);
+			//daoAnimal.createAnimal(animal);
 			cliente.setEndereco(endereco);
+			//cliente.addAnimalDeEstimacao(animal);
 			dao.createCliente(cliente);
 			FacesContext.getCurrentInstance().addMessage(null,
 	        new FacesMessage("Bem vindo " + cliente.getNome()));
@@ -131,5 +145,10 @@ public class ClienteMB {
      public void pesquisar() {
         clientes = dao.findClienteEntities();
     }
+     
+     
+     public void pegarAnimail(Animal animal){
+    	 this.animal = animal;
+     }
 	
 }

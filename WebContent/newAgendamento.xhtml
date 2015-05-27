@@ -50,8 +50,11 @@
 		 
 		    <p:dialog widgetVar="eventDialog" header="Novo Serviço" showEffect="clip" hideEffect="clip">
 		        <h:panelGrid id="eventDetails" columns="2">
-		            <h:outputText value="Serviço"/>
-		            <p:inputText id="servico"/>
+		            <h:outputText for="servico" value="Serviço"/>
+		            <p:selectOneMenu id="servico" value="#{scheduleView.servico}" style="width:200px" required="true">
+            					<f:selectItem itemLabel="Selecione o servico" itemValue="" />
+					            <f:selectItems value="#{scheduleView.mapaServicos}" />
+        					</p:selectOneMenu >
 		            
 		            <p:commandButton id="addButton" value="Concluir" actionListener="#{scheduleView.addEvent}" oncomplete="PF('myschedule').update();PF('eventDialog').hide();" />
 		            <p:commandButton type="reset" value="Limpar" />

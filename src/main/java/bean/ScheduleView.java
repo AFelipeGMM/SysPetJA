@@ -3,6 +3,11 @@ package bean;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;	// dropdown servicos
+import java.util.Map;	// dropdown servicos
+import java.util.List;	// dropdown servicos
+import java.util.ArrayList;	// dropdown servicos
+
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -18,21 +23,27 @@ import org.primefaces.model.DefaultScheduleModel;
 import org.primefaces.model.LazyScheduleModel;
 import org.primefaces.model.ScheduleEvent;
 import org.primefaces.model.ScheduleModel;
+
+import dao.ServicoService;	// dropdown servicos
+import dao.util.JPAUtil;	// dropdown servicos
+import models.Servico;	// dropdown servicos
  
 @ManagedBean
 @ViewScoped
 public class ScheduleView implements Serializable {
  
     private ScheduleModel eventModel;
-     
     private ScheduleModel lazyEventModel;
- 
     private ScheduleEvent event = new DefaultScheduleEvent();
+    
+    private ServicoService servicoService = new ServicoService(JPAUtil.EMF);	// dropdown servicos
+    private Map<String, String> mapaServicos;	// dropdown servicos
+    private List<Servico> servicos = new ArrayList<Servico>();	// dropdown servicos
+    private String servico;	// dropdown servicos
  
     @PostConstruct
     public void init() {
         eventModel = new DefaultScheduleModel();
-         
         lazyEventModel = new LazyScheduleModel() {
              
             @Override
@@ -44,6 +55,12 @@ public class ScheduleView implements Serializable {
                 addEvent(new DefaultScheduleEvent("Lazy Event 2", random, random));
             }   
         };
+        
+        servicos = servicoService.findServicoEntities();  // dropdown servicos
+        mapaServicos = new HashMap<String, String>();	// dropdown servicos
+        for(Servico s: servicos) {	// dropdown servicos
+        	mapaServicos.put(s.getTipo(), s.getTipo());	// dropdown servicos
+        }	// dropdown servicos
     }
      
     public Date getRandomDate(Date base) {
@@ -116,4 +133,19 @@ public class ScheduleView implements Serializable {
     private void addMessage(FacesMessage message) {
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
+    
+    //  dropdown servicos
+    //---------------------------
+    public Map<String, String> getMapaServicos() {
+    	return this.mapaServicos;
+    }
+    
+    public void setServico(String servico) {
+    	this.servico = servico;
+    }
+    
+    public String getServico() {
+    	return this.servico;
+    }
+    //--------------------------
 }
