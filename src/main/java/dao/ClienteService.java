@@ -1,70 +1,79 @@
 package dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 import dao.exceptions.NonexistentEntityException;
 import models.Cliente;
 
-public class ClienteService {
+public class ClienteService implements Serializable {
 
-	private EntityManagerFactory emf = null;
-	
-	/**
-	 * Metodo construtor da classe ClienteService
-	 * @param EntityManagerFactory
-	 * */
-	public ClienteService(EntityManagerFactory emf) {
-		this.setEMF(emf);
-	}
-	
-	/**
-	 * Metodo createCliente, persiste um cliente no DB
-	 * @param Cliente
-	 * @return null
-	 * */
-	public void createCliente(Cliente cliente) {
-		EntityManager em = null;
-		
-		try {
-			em = createEntityManager();
-			em.getTransaction().begin();
-			em.persist(cliente);
-			em.flush();
-			em.refresh(cliente);
-			em.getTransaction().commit();
-			em.close();
-			
-		}catch(Exception e) {
-			//TODO tratar a exception com mais cautela
-			e.printStackTrace();
-		}
-	}
-	
-	/**
-	 * Remove uma das entidades do banco de dados de acordo com o ID
-	 * @param id
-	 * @throws NonexistentEntityException
-	 */
-	
-	public void destroy(long id) throws NonexistentEntityException {
+    public ClienteService(EntityManagerFactory emf) {
+        this.emf = emf;
+    }
+    private EntityManagerFactory emf = null;
+
+    public EntityManager getEntityManager() {
+        return emf.createEntityManager();
+    }
+
+    public void create(Cliente cliente) {
         EntityManager em = null;
-        
         try {
-            em = emf.createEntityManager();
+            em = getEntityManager();
+            em.getTransaction().begin();
+            em.persist(cliente);
+            em.getTransaction().commit();
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
+
+    public void edit(Cliente cliente) throws NonexistentEntityException, Exception {
+        EntityManager em = null;
+        try {
+            em = getEntityManager();
+            em.getTransaction().begin();
+            cliente = em.merge(cliente);
+            em.getTransaction().commit();
+        } catch (Exception ex) {
+            String msg = ex.getLocalizedMessage();
+            if (msg == null || msg.length() == 0) {
+                Long id = cliente.getId();
+                if (findCliente(id) == null) {
+                    throw new NonexistentEntityException("The cliente with id " + id + " no longer exists.");
+                }
+            }
+            throw ex;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
+
+    public void destroy(Long id) throws NonexistentEntityException {
+        EntityManager em = null;
+        try {
+            em = getEntityManager();
             em.getTransaction().begin();
             Cliente cliente;
             try {
-                cliente = em.getReference(Cliente.class, id);
-                cliente.getId();
+            	cliente = em.getReference(Cliente.class, id);
+            	cliente.getId();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The cliente com id " + id + " nao existe.", enfe);
+                throw new NonexistentEntityException("The cliente with id " + id + " no longer exists.", enfe);
             }
             em.remove(cliente);
             em.getTransaction().commit();
@@ -74,64 +83,19 @@ public class ClienteService {
             }
         }
     }
-	
-	/**
-	 * Metodo createEntityManager, cria um EntityManager para ser usado no service
-	 * @param null
-	 * @return EntityManager
-	 * */
-	public EntityManager createEntityManager() {
-		return this.getEMF().createEntityManager();
-	}
-	
-	/**
-	 * Metodo setEMF, encapsula o acesso a variavel emf
-	 * @param EntityManagerFactory
-	 * @return null
-	 * */
-	public void setEMF(EntityManagerFactory emf) {
-		this.emf = emf;
-	}
-	/**
-	 * Metodo getEMF, encapsula o acesso a variavel emf
-	 * @param null
-	 * @return EntityManagerFactory
-	 * */
-	public EntityManagerFactory getEMF() {
-		return this.emf;
-	}
-	
-	/**
-	 * Utilizado para o retorno da pagina de pesquisa em manterCliente
-	 * @return a recuperação da pagina de pesquisa
-	 */
-	public List<Cliente> findClienteEntities() {
+
+    public List<Cliente> findClienteEntities() {
         return findClienteEntities(true, -1, -1);
-     }
-	
-	/**
-	 * Utilizado para encontrar o numero de cliente maximo e minimo eu acho
-	 * @param maxResults
-	 * @param firstResult
-	 * @return
-	 */
+    }
 
     public List<Cliente> findClienteEntities(int maxResults, int firstResult) {
         return findClienteEntities(false, maxResults, firstResult);
     }
-    
-    /**
-     * lista os clientes para a tabela na pagina manterCliente
-     * @param all
-     * @param maxResults
-     * @param firstResult
-     * @return
-     */
 
     private List<Cliente> findClienteEntities(boolean all, int maxResults, int firstResult) {
-        EntityManager em = emf.createEntityManager();
+        EntityManager em = getEntityManager();
         try {
-            CriteriaQuery<Object> cq = em.getCriteriaBuilder().createQuery();
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
             cq.select(cq.from(Cliente.class));
             Query q = em.createQuery(cq);
             if (!all) {
@@ -143,21 +107,41 @@ public class ClienteService {
             em.close();
         }
     }
-    
-    /**
-     * pesquisar os clientes pelo nome
-     * @param nome
-     * @return
-     */
-    
-    public List<Cliente> pesquisarPorNome(String nome) {
-        EntityManager em = emf.createEntityManager();
 
-        TypedQuery<Cliente> q;
-        q = em.createQuery("select p from Cliente p where p.nome like :nome",
-                Cliente.class);
-        q.setParameter("nome", "%" + nome + "%");
-
-        return q.getResultList();
+    public Cliente findCliente(Long id) {
+        EntityManager em = getEntityManager();
+        try {
+            return em.find(Cliente.class, id);
+        } finally {
+            em.close();
+        }
     }
+
+    public int getClienteCount() {
+        EntityManager em = getEntityManager();
+        try {
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            Root<Cliente> rt = cq.from(Cliente.class);
+            cq.select(em.getCriteriaBuilder().count(rt));
+            Query q = em.createQuery(cq);
+            return ((Long) q.getSingleResult()).intValue();
+        } finally {
+            em.close();
+        }
+    }
+    
+     public Cliente findCliente(String email, String senha){
+        EntityManager em = getEntityManager();
+        TypedQuery<Cliente> query;
+        query = em.createQuery("select a from Cliente a where a.email=:email" +
+                               " and a.senha=:senha", Cliente.class);
+        query.setParameter("email", email);
+        query.setParameter("senha", senha);
+        try{
+            return query.getSingleResult();
+        }catch(NoResultException e){
+            return null;
+        }
+    }
+    
 }

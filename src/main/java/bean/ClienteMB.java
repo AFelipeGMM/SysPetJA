@@ -1,5 +1,6 @@
 package bean;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -9,6 +10,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 import org.primefaces.event.FlowEvent;
 
@@ -26,129 +29,152 @@ import models.Endereco;
 @RequestScoped
 @ViewScoped
 public class ClienteMB {
-	private Cliente cliente = new Cliente();
-	private Endereco endereco = new Endereco();
-	private Animal animal = new Animal();
-	public final ClienteService dao = new ClienteService(JPAUtil.EMF);
-	public final AnimalService daoAnimal = new AnimalService(JPAUtil.EMF);
-	public final EnderecoService daoEndereco = new EnderecoService(JPAUtil.EMF);
-	private String pesquisa;
-	private List<Cliente> clientes;
-	private boolean skip;
-	
-	public void setPesquisa(String pesquisa){
-		this.pesquisa = pesquisa;
-	}
-	
-	public String getPesquisa(){
-		return pesquisa;
-	}
-	
-	public Cliente getCliente() {
-		return cliente;
-	}
 
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
-	
-	public Endereco getEndereco()
-	{
-		return endereco;
-	}
-	
-	public void setEndereco(Endereco endereco){
-		this.endereco = endereco;
-	}
-	
-	/**
-	 * Os metodos a seguir sao utilizados para passar de uma aba para outra
-	 * Pois estou utilizando o painel Wizard
-	 */
-	
-	public boolean isSkip() {
-        return skip;
-    }
- 
-    public void setSkip(boolean skip) {
-        this.skip = skip;
-    }
-     
-    public String onFlowProcess(FlowEvent event) {
-        if(skip) {
-            skip = false;   //reseta caso o usuario utilize o voltar
-            return "confirme";
-        }
-        else {
-            return event.getNewStep();
-        }
-    }
     
-    /**
-     * Metodo utilizado para persistir os dados no banco de dados
-     * utilizando os metodos das classes services em DAO
-     */
+    ClienteService dao = new ClienteService(JPAUtil.EMF);
+    EnderecoService daoEndereco = new EnderecoService(JPAUtil.EMF);
+    private Endereco endereco = new Endereco();
+    private String mensagem = "";
+    private List<Cliente> clientes = new ArrayList<Cliente>();
+    private Cliente cliente = new Cliente();
+    private String clientePesquisado;
 
-	public void salvar(){
-		try {
-			daoEndereco.createEndereco(endereco);
-			//daoAnimal.createAnimal(animal);
-			cliente.setEndereco(endereco);
-			//cliente.addAnimalDeEstimacao(animal);
-			dao.createCliente(cliente);
-			FacesContext.getCurrentInstance().addMessage(null,
-	        new FacesMessage("Bem vindo " + cliente.getNome()));
-		} catch (Exception ex) {
-			// TODO: handle exception
-		}
-	}
-	
-	public void excluir(long id, long idEnd){
+    public ClienteMB() {
+        pesquisar();
+    }
+
+    public String getMensagem() {
+        return mensagem;
+    }
+
+    public void setMensagem(String mensagem) {
+        this.mensagem = mensagem;
+    }
+
+    public String getMensagemExclusao() {
+        return mensagem;
+    }
+
+    public void setMensagemExclusao(String mensagem) {
+        this.mensagem = mensagem;
+    }
+
+    public String getMensagemAlteracao() {
+        return mensagem;
+    }
+
+    public void setMensagemAlteracao(String mensagem) {
+        this.mensagem = mensagem;
+    }
+
+    //metodo de inserção no banco de dados
+    public void inserir() {
         try {
-            dao.destroy(id);
-            daoEndereco.destroy(idEnd);
-        } catch (NonexistentEntityException ex) {
+        	daoEndereco.createEndereco(endereco);
+        	cliente.setEndereco(endereco);
+            dao.create(cliente);
+            this.setMensagem(this.cliente.getNome() + " cadastrado(a) com sucesso! ");
+            cliente = new Cliente();
+        } catch (Exception ex) {
+            setMensagem(this.cliente.getNome() + "já existe no sistema, cadastro não realizado!");
             Logger.getLogger(ClienteMB.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        pesquisar();
     }
-	
-	public void carregar(Cliente cliente){
-        this.setCliente(cliente);
+
+    public void excluir() {
+        try {
+            dao.destroy(cliente.getId());
+            daoEndereco.destroy(endereco.getId());
+            setMensagemExclusao(this.cliente.getNome() + "  foi excluído(a) com sucesso!");
+            cliente = new Cliente();
+        } catch (NonexistentEntityException ex) {
+            this.setMensagemExclusao("id não existe");
+            Logger.getLogger(ClienteMB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        pesquisar();
     }
-  
-    public void limpar(){
-        this.setCliente(new Cliente());
+
+    public void alterar() throws Exception {
+        try {
+            dao.edit(cliente);
+            setMensagemAlteracao(this.cliente.getNome() + " foi alterado(a) com sucesso!");
+            cliente = new Cliente();
+        } catch (NonexistentEntityException ex) {
+            this.setMensagemAlteracao("id não existe");
+            Logger.getLogger(ClienteMB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        pesquisar();
+    }
+
+    public void carregar(Long id) {
+        Cliente a = dao.findCliente(id);
+        cliente.setNome(a.getNome());
+        cliente.setCPF(a.getCPF());
+        cliente.setSenha(a.getSenha());
+        cliente.setEmail(a.getEmail());
+        cliente.setId(a.getId());
+
+        if (cliente == null) {
+            cliente = new Cliente();
+        }
     }
     
-    public List<Cliente> getClientes(){
-        if(pesquisa == null){
-            clientes = dao.findClienteEntities();
-        } else if(pesquisa.isEmpty()){
-            clientes = dao.findClienteEntities();
-        } else {
-            pesquisarPorNome();
+    public void carregar1(Cliente cliente){
+    	this.setCliente(cliente);
+    }
+
+    public int pesquisar() {
+        clientes = dao.findClienteEntities();
+        return clientes.size();
+    }
+
+    public void pesquisarClientes() {
+        clientes = new ArrayList<Cliente>();
+        for (Cliente a : dao.findClienteEntities()) {
+            if ((a.getEmail().toLowerCase().contains(clientePesquisado) || (a.getNome().toLowerCase().contains(clientePesquisado)))) {
+                clientes.add(a);
+
+            }
         }
+        setClientePesquisado("");
+       
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public List<Cliente> getClienteList() {
         return clientes;
     }
-    
-   
-    public void pesquisarPorNome(){
-        clientes = dao.pesquisarPorNome(pesquisa);
+
+    public void setClienteList(ArrayList<Cliente> clientes) {
+        this.clientes = clientes;
     }
-    
-   
-    public void getTodos(){
-        pesquisa = "";
-        this.getClientes();
+
+    public List<Cliente> pesquisarCliente() {
+        return dao.findClienteEntities();
     }
-    
-     public void pesquisar() {
-        clientes = dao.findClienteEntities();
+
+    public String getClientePesquisado() {
+        return clientePesquisado;
     }
-     
-     
-     public void pegarAnimail(Animal animal){
-    	 this.animal = animal;
-     }
-	
+
+    public void setClientePesquisado(String clientePesquisado) {
+        this.clientePesquisado = clientePesquisado;
+    }
+
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
 }

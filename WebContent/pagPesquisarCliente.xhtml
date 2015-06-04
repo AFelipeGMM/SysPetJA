@@ -37,7 +37,7 @@
         
        <p:panel header="Clientes" toggleable="true" toggleTitle="Minimizar/Maximizar">
 	
-        <p:dataTable value="#{clienteMB.clientes}" emptyMessage="Nenhum cliente"
+        <p:dataTable value="#{clienteMB.clienteList}" emptyMessage="Nenhum cliente"
                      paginatorTemplate="{PreviousPageLink} {CurrentPageReport}
                      {PageLinks} {NextPageLink} {RowsPerPageDropdown}"
                      paginator="true" rows="5" rowsPerPageTemplate="5,10,20"
@@ -52,7 +52,7 @@
                 </f:facet>
                 <h:form>
                     <center>
-                        <p:commandLink ajax="false" value="#{cliente.nome}" action="#{clienteMB.carregar(cliente)}"/>
+                        <p:commandLink ajax="false" value="#{cliente.nome}" action="#{clienteMB.carregar1(cliente)}"/>
                     </center>
                     
                 </h:form>
@@ -64,7 +64,7 @@
                 </f:facet>
                 <h:form>
                     <center>
-                       <p:commandLink ajax="false" value="#{cliente.CPF}" action="#{clienteMB.carregar(cliente)}"/>
+                       <p:commandLink ajax="false" value="#{cliente.CPF}" action="#{clienteMB.carregar1(cliente)}"/>
                     </center>
                     
                 </h:form>
@@ -76,7 +76,7 @@
                 </f:facet>
                 <h:form>
                     <center>
-                       <p:commandLink ajax="false" value="#{cliente.endereco.rua}" action="#{clienteMB.carregar(cliente)}"/>
+                       <p:commandLink ajax="false" value="#{cliente.endereco.rua}" action="#{clienteMB.carregar1(cliente)}"/>
                     </center>
                     
                 </h:form>
@@ -88,7 +88,7 @@
                 </f:facet>
                 <h:form>
                     <center>
-                       <p:commandLink ajax="false" value="#{cliente.endereco.numero}" action="#{clienteMB.carregar(cliente)}"/>
+                       <p:commandLink ajax="false" value="#{cliente.endereco.numero}" action="#{clienteMB.carregar1(cliente)}"/>
                     </center>
                     
                 </h:form>
@@ -100,7 +100,7 @@
                 </f:facet>
                 <h:form>
                     <center>
-                       <p:commandLink ajax="false" value="#{cliente.endereco.bairro}" action="#{clienteMB.carregar(cliente)}"/>
+                       <p:commandLink ajax="false" value="#{cliente.endereco.bairro}" action="#{clienteMB.carregar1(cliente)}"/>
                     </center>
                     
                 </h:form>
@@ -112,7 +112,7 @@
                 </f:facet>
                 <h:form>
                     <center>
-                       <p:commandLink ajax="false" value="#{cliente.endereco.cidade}" action="#{clienteMB.carregar(cliente)}"/>
+                       <p:commandLink ajax="false" value="#{cliente.endereco.cidade}" action="#{clienteMB.carregar1(cliente)}"/>
                     </center>
                     
                 </h:form>
@@ -124,7 +124,7 @@
                 </f:facet>
                 <h:form>
                     <center>
-                       <p:commandLink ajax="false" value="#{cliente.endereco.UF}" action="#{clienteMB.carregar(cliente)}"/>
+                       <p:commandLink ajax="false" value="#{cliente.endereco.UF}" action="#{clienteMB.carregar1(cliente)}"/>
                     </center>
                     
                 </h:form>
@@ -142,17 +142,7 @@
         
         </p:panel>
         
-        <p:panel header="Pesquisar Cliente Por Nome"  toggleable="true" toggleTitle="Minimizar/Maximizar">
-            <h:form id="formPesqClientes">
-                <h:panelGrid columns="3">
-                    <h:outputLabel value="Nome do Cliente:"/>
-                    <p:inputText id="campoPesqNome" value="#{clienteMB.pesquisa}"/>
-                    <p:message for="formPesqClientes"/>
-                </h:panelGrid>
-                <p:commandButton value="Pesquisar" ajax="false"
-                                 action="#{clienteMB.pesquisarPorNome()}" image="ui-icon-search"/>
-            </h:form>
-        </p:panel>
+        
         <hr></hr>
         
     </h:body>

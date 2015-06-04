@@ -127,4 +127,9 @@ private static final long serialVersionUID = 1L;
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
+
+    @Override
+    public String toString() {
+        return "modelo.Pessoa[ id=" + id + " ]";
+    }
 }

@@ -29,4 +29,6 @@ public class Cliente extends Pessoa implements Serializable {
 	public List<Animal> getAnimaisDeEstimacao() {
 		return this.animaisDeEstimacao;
 	}
+	
+	
 }
