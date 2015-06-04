@@ -99,7 +99,7 @@ public class LoginClienteMB {
     public String logar(){
        boolean aux = validarLogin(); 
         if (aux== true){         
-            return "/aluno.xhtml";
+            return "/cliente.xhtml";
         } else {
             FacesUtil.adicionarMensagem("formEntrarCliente", "Email e senha não conferem !");
             return null;
@@ -110,7 +110,7 @@ public class LoginClienteMB {
      * 
      * @return a página inicial.
      */
-    public String deslogarA(){
+    public String deslogarC(){
         setDeslogado();
         cliente = new Cliente();
         email = null;        
