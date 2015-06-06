@@ -14,7 +14,10 @@
 			<p:inputText id="emailCliente" required="true" />
         	<p:commandButton value="Confirmar" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
     	</p:confirmDialog>
-		
+		<p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true" style="border: 0px">
+                    <center><p:graphicImage library="imagens" name="logoMarca.png"></p:graphicImage></center>                     
+        </p:layoutUnit>
+        
 		<p:layoutUnit position="top" >
             <p:menubar>  
                  <p:menuitem value="Início" url="" icon="ui-icon-home" />  
@@ -41,8 +44,13 @@
             </h:form>
 	
 		<center>
+			
 			<h:form id="formCadastro">
 				<h:panelGrid>
+				  <h:panelGrid columns="2" width="500">
+				  		<p:layoutUnit position="east" closable="false" style="border: none"  >
+	                    	<center><p:graphicImage library="imagens" name="dogs.png"></p:graphicImage></center>                     
+	        			</p:layoutUnit>
 					<p:panel header="Dados do animal">
 						<h:panelGrid columns="2" width="500">
 							<h:outputText value="Nome: "/>
@@ -83,6 +91,7 @@
 	                        <p:commandButton value="CANCELAR" type="reset"/>
 	                       </h:panelGrid>
 					</p:panel>
+					</h:panelGrid>
 				</h:panelGrid>
 			</h:form>
 		</center>
