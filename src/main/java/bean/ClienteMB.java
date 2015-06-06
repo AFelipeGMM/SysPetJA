@@ -33,11 +33,15 @@ public class ClienteMB {
     
     ClienteService dao = new ClienteService(JPAUtil.EMF);
     EnderecoService daoEndereco = new EnderecoService(JPAUtil.EMF);
+    AnimalService daoAnimal = new AnimalService(JPAUtil.EMF);
     private Endereco endereco = new Endereco();
     private String mensagem = "";
     private List<Cliente> clientes = new ArrayList<Cliente>();
     private Cliente cliente = new Cliente();
     private String clientePesquisado;
+    private Animal animal = new Animal();
+    private List<Animal> animais = new ArrayList<Animal>();
+    private LoginClienteMB clienteLogado = new LoginClienteMB();
 
     public ClienteMB() {
         pesquisar();
@@ -65,6 +69,14 @@ public class ClienteMB {
 
     public void setMensagemAlteracao(String mensagem) {
         this.mensagem = mensagem;
+    }
+    
+    //metodo usado para setar o cliente logado e add o animal
+    public void salvarAnimal(Cliente cliente) throws NonexistentEntityException, Exception{
+    	this.setCliente(cliente);
+    	cliente.addAnimal(animal);
+    	daoAnimal.createAnimal(animal);
+    	dao.edit(cliente);
     }
 
     //metodo de inserção no banco de dados
@@ -124,6 +136,10 @@ public class ClienteMB {
     public void carregar1(Cliente cliente){
     	this.setCliente(cliente);
     }
+    
+    public void carregarAnimal(Animal animal){
+    	this.setAnimal(animal);
+    }
 
     public int pesquisar() {
         clientes = dao.findClienteEntities();
@@ -140,6 +156,12 @@ public class ClienteMB {
         }
         setClientePesquisado("");
        
+    }
+    
+    public int pesquisarAnimalTamanho() {
+        animais = cliente.getAnimais();
+        return animais.size();
+
     }
 
     public Cliente getCliente() {
@@ -176,5 +198,21 @@ public class ClienteMB {
 
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
+	}
+
+	public Animal getAnimal() {
+		return animal;
+	}
+
+	public void setAnimal(Animal animal) {
+		this.animal = animal;
+	}
+
+	public LoginClienteMB getClienteLogado() {
+		return clienteLogado;
+	}
+
+	public void setClienteLogado(LoginClienteMB clienteLogado) {
+		this.clienteLogado = clienteLogado;
 	}
 }

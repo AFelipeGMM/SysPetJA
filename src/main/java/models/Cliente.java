@@ -12,22 +12,22 @@ import javax.persistence.Entity;
 public class Cliente extends Pessoa implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
-	private List<Animal> animaisDeEstimacao;
+	private List<Animal> animais;
 	
 	public Cliente() {
 		
 	}
 	
-	public void addAnimalDeEstimacao(Animal pet) {
-		this.animaisDeEstimacao.add(pet);
+	public void addAnimal(Animal pet) {
+		this.animais.add(pet);
 	}
 	
-		public void setAnimaisDeEstimacao(ArrayList<Animal> animais) {
-		this.animaisDeEstimacao = animais;
+		public void setAnimais(ArrayList<Animal> animais) {
+		this.animais = animais;
 	}
 	
-	public List<Animal> getAnimaisDeEstimacao() {
-		return this.animaisDeEstimacao;
+	public List<Animal> getAnimais() {
+		return this.animais;
 	}
 	
 	

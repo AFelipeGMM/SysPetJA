@@ -36,10 +36,10 @@
 
                 <p:menubar> 
 
-                    <p:menuitem value="Início" url="aluno.xhtml" icon="ui-icon-home" />  
+                    <p:menuitem value="Início" url="cliente.xhtml" icon="ui-icon-home" />  
 
-                    <p:submenu label="Lista de Animais">  
-                        <p:menuitem value="Animais" url="listaAnimaisCliente.xhtml" />
+                    <p:submenu label="Animais">  
+                        <p:menuitem value="Cadastrar" url="listaAnimaisCliente.xhtml" />
                     </p:submenu> 
                     
                     <p:menuitem value="Sair" icon="ui-icon-close" action="#{loginClienteMB.deslogarC()}"/> 
@@ -62,6 +62,51 @@
                 </p:fieldset>
 
             </h:form>
+
+            <br/>
+            
+            <br/>
+            <p:fieldset legend="LISTA DE ANIMAIS" style="color: cornflowerblue">
+                <p:dataTable id="tabelaAni" value="#{loginClienteMB.cliente.animais}" var="animal" paginator="true" rows="10"  
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+
+                    <p:column  >
+                        <f:facet name="header">
+                            <h:outputText value="Nome" style="color: white"/>
+                        </f:facet>             
+                        <h:form >
+                            <h:commandLink value="${animal.nome}">   
+                                <f:setPropertyActionListener value="#{animal}" target="#{clienteMB.carregarAnimal(animal)}"/>
+                            </h:commandLink>  
+                        </h:form>
+                    </p:column>
+
+                    <p:column  >
+                        <f:facet name="header">
+                            <h:outputText value="Raca" style="color: white"/>
+                        </f:facet>             
+                        <h:form >
+                            <h:commandLink value="${animal.raca}">   
+                                <f:setPropertyActionListener value="#{animal}" target="#{clienteMB.carregarAnimal(animal)}"/>
+                            </h:commandLink>  
+                        </h:form>
+                    </p:column>
+
+
+                    <p:column  >
+                        <f:facet name="header">
+                            <h:outputText value="Peso" style="color: white"/>
+                        </f:facet>             
+                        <h:form >
+                            <h:commandLink value="${animal.peso}">   
+                                <f:setPropertyActionListener value="#{animal}" target="#{clienteMB.carregarAnimal(animal)}"/>
+                            </h:commandLink>  
+                        </h:form>
+                    </p:column>
+
+                </p:dataTable>  
+
+            </p:fieldset>
 
             <br/>
 

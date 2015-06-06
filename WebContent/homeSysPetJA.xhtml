@@ -22,7 +22,18 @@
                             SYSPETJA
                         </h1>   
                     </center>
+                    
+                    
+                    
                 </p:layoutUnit>
+                
+                  	
+                <p:layoutUnit position="west" size="200" resizable="true" visible="true">
+                	<h:form>
+                    	<p:commandButton value="cadastrar" action="/faces/pagCdastroCliente.xhtml"></p:commandButton>
+                    </h:form>
+                </p:layoutUnit>
+
 
                 <p:layoutUnit position="center" resizable="true" visible="true">
 
@@ -30,27 +41,7 @@
 
                        
 
-                            <p:accordionPanel value="LOGIN">  
-                                <p:tab title="LOGIN DO ADMINISTRADOR">  
-
-                                    <h:form id="formEntrarAdm">
-
-                                        <br/>
-                                        <h:messages style="color:red" />
-                                        <h:outputText value="Matrícula : "/>
-                                        <p:inputMask  value="" required="true" requiredMessage="Campo obrigatório" maxlength="10" mask="9999999999" >
-                                        </p:inputMask>
-                                        <br/>
-                                        <br/>
-                                        <h:outputText value="Senha : "/><p:spacer height="20"/>
-                                        <p:password value="" required="true" requiredMessage="Campo obrigatório" maxlength="30"/>
-                                        <div/>
-                                        <p:spacer height="70"/>
-                                        <h:commandButton value="Entrar" />
-
-                                    </h:form>
-
-                                </p:tab>  
+                            <p:accordionPanel value="LOGIN">    
 
                                 <p:tab title="LOGIN DO CLIENTE"> 
 
@@ -58,7 +49,7 @@
 
                                         <br/>
                                         <h:messages style="color:red"/>
-                                        <h:outputText value="EMAIL : "/>
+                                        <h:outputText value="Email : "/>
                                         <p:inputText value="#{loginClienteMB.email}" required="true" requiredMessage="Campo obrigatório" maxlength="50" >
                                         </p:inputText>
                                         <br/>
@@ -70,14 +61,15 @@
                                         <h:commandButton value="Entrar" action="#{loginClienteMB.logar()}"/>
 
                                     </h:form>
+                                    
                                 </p:tab>  
 
-                                <p:tab title="LOGIN DO CORRETOR"> 
+                                <p:tab title="LOGIN DO FUNCIONÁRIO"> 
                                     <h:form id="formEntrarCor">
 
                                         <br/>
                                         <h:messages style="color:red"/>
-                                        <h:outputText value="Matrícula : "/>
+                                        <h:outputText value="Email : "/>
                                         <p:inputMask  value="" required="true" requiredMessage="Campo obrigatório" maxlength="10" mask="9999999999" >
                                         </p:inputMask>
                                         <br/>
