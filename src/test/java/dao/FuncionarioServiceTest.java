@@ -78,7 +78,6 @@ public class FuncionarioServiceTest {
 			assertNotEquals("8", 0L, funcionario1.getId());
 			assertEquals("9", "Júnior", funcionario1.getNome());
 			assertNotNull("10", service.pesquisarPorNome("Júnior"));
-			
 		} catch(Exception e){
 			fail();
 			e.printStackTrace();
