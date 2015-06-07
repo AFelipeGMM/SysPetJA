@@ -21,6 +21,7 @@ public class Servico implements Serializable {
 	private String tipo;
 	private double valor;
 	private int duracao;
+	private Funcionario funcionario; //coloquei aqui para identificar qual funcionario iria fazer o servico
 	
 	/**
 	 * */
@@ -68,5 +69,15 @@ public class Servico implements Serializable {
 	 */
 	public void setDuracao(int duracao) {
 		this.duracao = duracao;
+	}
+
+
+	public Funcionario getFuncionario() {
+		return funcionario;
+	}
+
+
+	public void setFuncionario(Funcionario funcionario) {
+		this.funcionario = funcionario;
 	}
 }

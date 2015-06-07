@@ -49,7 +49,9 @@ public class Agenda implements Serializable{
 	public void setStatus(boolean status) {
 		Status = status;
 	}
-	
+	public long getId(){
+		return id;
+	}
 	
 
 }
