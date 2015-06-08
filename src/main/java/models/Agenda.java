@@ -22,6 +22,8 @@ public class Agenda implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
+	@Temporal(TemporalType.DATE)
+	private Date dataAgenda;
 	@Temporal(TemporalType.TIME)
 	private Date horaInicio;
 	@Temporal(TemporalType.TIME)
@@ -51,6 +53,24 @@ public class Agenda implements Serializable{
 	}
 	public long getId(){
 		return id;
+	}
+	public Date getDataAgenda() {
+		return dataAgenda;
+	}
+	public void setDataAgenda(Date dataAgenda) {
+		this.dataAgenda = dataAgenda;
+	}
+	public Date getHoraInicio() {
+		return horaInicio;
+	}
+	public void setHoraInicio(Date horaInicio) {
+		this.horaInicio = horaInicio;
+	}
+	public Date getHoraFim() {
+		return horaFim;
+	}
+	public void setHoraFim(Date horaFim) {
+		this.horaFim = horaFim;
 	}
 	
 

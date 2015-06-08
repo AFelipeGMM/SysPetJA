@@ -14,7 +14,7 @@
             </f:facet>
 
         </h:head>
-
+	
         <h:body>
 
             <h:form>  
@@ -48,51 +48,44 @@
 
             </h:form> 
             
-            <h:form id="formCadastroAnimal">
+            <h:form id="formCadastroAgenda">
 				<h:panelGrid>
-					<p:panel header="Dados do animal">
+					<p:panel header="Dados da agenda">
 						<h:panelGrid columns="2" width="500">
-							<h:outputText value="Nome: "/>
-							<p:inputText id="animalNome" value="#{clienteMB.animal.nome}" maxlength="50" />
-							<h:outputText value="Especie: "/>
-							<p:inputMask id="especie" value="#{clienteMB.animal.especie}" maxlength="50"/>
-							<h:outputText value="Raca: "/>
-							<p:inputText id="raca" value="#{clienteMB.animal.raca}" maxlength="50"/>
+							<p:outputLabel for="animalCliente" values="Animal: "/>
+							<p:selectOneMenu id="animalCliente" value="#{agendaMB.agenda.animal}" style="width:200xp" required="true">
+								<f:selectItem itemLabel="Selecionar animal" value="" />
+								<f:selectItems value="#{loginClienteMB.cliente.animais}" />
+							</p:selectOneMenu>
 							
-							<h:outputText value="Porte"/>
-							<p:selectOneMenu id="porte" value="#{clienteMB.animal.porte}" style="width:200px" required="true">
-            					<f:selectItem itemLabel="Selecionar" itemValue="" />
-					            <f:selectItem itemLabel="Pequeno" itemValue="Pequeno" />
-					            <f:selectItem itemLabel="Medio" itemValue="Medio" />
-					            <f:selectItem itemLabel="Grande" itemValue="Grande" />
+							<p:outputLabel for="servico" value="Servico: "/>
+							<p:selectOneMenu id="servico" value="#{agendaMB.agenda.servico}" style="width:200xp" required="true">
+								<f:selectItem itemLabel="Selecionar servico" value="" />
+								<f:selectItems value="#{agendaMB.mapaServico}" />
+							</p:selectOneMenu>
+							
+							<p:outputLabel for="dataAgenda" value="Data:" />
+        					<p:calendar id="dataAgenda" value="#{agendaMB.agenda.dataAgenda}" locale="de" navigator="true" pattern="dd-MM-yyyy" />
+ 							
+							
+							<h:outputText value="Hora marcada: "/>
+							<p:selectOneMenu id="servico" value="#{agendaMB.agenda.horaInicio}" style="width:200px" required="true">
+            					<f:selectItem itemLabel="Selecione horario disponível" itemValue="" />
+					            <f:selectItems value="#{agendaMB.horariosDiscponiveis(animalCliente, dataAgenda)}" />
         					</p:selectOneMenu >
-
-
-							<h:outputText value="Peso: "/>
-							<p:inputText id="peso" value="#{clienteMB.animal.peso}" maxlength="50"/>
 							
-							<p:outputLabel for="dataDeNasc" value="Data de nascimento:" />
-        					<p:calendar id="dataDeNasc" value="#{clienteMB.animal.dataDeNasc}" locale="de" navigator="true" pattern="dd-MM-yyyy" />
- 
-							
-							
-							<h:outputText value="Sexo: "/>
-							<p:selectOneRadio id="console" value="#{clienteMB.animal.sexo}">
-					            <f:selectItem itemLabel="Masculino" itemValue="Masculino" />
-					            <f:selectItem itemLabel="Feminino" itemValue="Feminino" />
-					        </p:selectOneRadio>
 						</h:panelGrid>
 						
 						<p:separator/>
 						
 						<h:panelGrid columns="2">
-							<p:commandButton id="btGravar" value="GRAVAR" action="#{clienteMB.salvarAnimal(loginClienteMB.cliente)}" ajax="false" />
+							<p:commandButton id="btGravar" value="GRAVAR" action="#{agendaMB.salvar()}" ajax="false" />
 	                        <p:commandButton value="CANCELAR" type="reset"/>
 	                       </h:panelGrid>
 					</p:panel>
 				</h:panelGrid>
 			</h:form>
-	  
+	  </h:body> 	 </f:view> 
 	  
       
 </html>
