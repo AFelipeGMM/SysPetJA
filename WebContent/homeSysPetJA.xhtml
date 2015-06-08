@@ -17,31 +17,33 @@
             <p:layout fullPage="true">
 
                 <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
-                    <center for="nome" style="color:cornflowerblue"> 
-                        <h1> 
-                            SYSPETJA
-                        </h1>   
-                    </center>
-                    
-                    
-                    
+                    <center><p:graphicImage library="imagens" name="logoMarca.png"></p:graphicImage></center>                     
                 </p:layoutUnit>
-                
-                  	
-                <p:layoutUnit position="west" size="200" resizable="true" visible="true">
-                	<h:form>
-                    	<p:commandButton value="cadastrar" action="/faces/pagCadastroCliente.xhtml" />
-                    </h:form>
-                </p:layoutUnit>
-
 
                 <p:layoutUnit position="center" resizable="true" visible="true">
 
                     <form method="post"> 
+                            <p:accordionPanel value="LOGIN">  
+                                <p:tab title="LOGIN DO FUNCIONARIO">  
 
-                       
+                                    <h:form id="formEntrarFunc">
 
-                            <p:accordionPanel value="LOGIN">    
+                                        <br/>
+                                        <h:messages style="color:red" />
+                                        <h:outputText value="Email : "/>
+                                        <p:inputMask  value="" required="true" requiredMessage="Campo obrigatório" maxlength="10" mask="9999999999" >
+                                        </p:inputMask>
+                                        <br/>
+                                        <br/>
+                                        <h:outputText value="Senha : "/><p:spacer height="20"/>
+                                        <p:password value="" required="true" requiredMessage="Campo obrigatório" maxlength="30"/>
+                                        <div/>
+                                        <p:spacer height="70"/>
+                                        <h:commandButton value="Entrar" />
+
+                                    </h:form>
+
+                                </p:tab>  
 
                                 <p:tab title="LOGIN DO CLIENTE"> 
 
@@ -61,28 +63,9 @@
                                         <h:commandButton value="Entrar" action="#{loginClienteMB.logar()}"/>
 
                                     </h:form>
-                                    
                                 </p:tab>  
 
-                                <p:tab title="LOGIN DO FUNCIONÁRIO"> 
-                                    <h:form id="formEntrarCor">
-
-                                        <br/>
-                                        <h:messages style="color:red"/>
-                                        <h:outputText value="Email : "/>
-                                        <p:inputMask  value="" required="true" requiredMessage="Campo obrigatório" maxlength="10" mask="9999999999" >
-                                        </p:inputMask>
-                                        <br/>
-                                        <br/>
-                                        <h:outputText value="Senha : "/><p:spacer height="20"/>
-                                        <p:password  value="" required="true" requiredMessage="Campo obrigatório" maxlength="30"/>
-                                        <div/>
-                                        <p:spacer height="70"/>
-                                        <h:commandButton value="Entrar" />
-
-                                    </h:form>
-
-                                </p:tab>  
+                                
 
                             </p:accordionPanel> 
 
@@ -92,8 +75,8 @@
 
                 </p:layoutUnit>
 
-                <p:layoutUnit position="south" size="50" closable="true" collapsible="true">
-                   
+                <p:layoutUnit position="south" resizable="false">
+                   <center><p:graphicImage library="imagens" name="furry-friends-crop.jpg"></p:graphicImage></center>                     
                 </p:layoutUnit>
 
             </p:layout>
