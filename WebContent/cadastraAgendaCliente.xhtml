@@ -1,0 +1,98 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+	  
+	  
+	  <f:view contentType="text/html">
+        <h:head>
+
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Usuario_Cliente</title>
+            </f:facet>
+
+        </h:head>
+
+        <h:body>
+
+            <h:form>  
+
+                <p:growl id="messages"/>  
+
+                <center for="nome" style="color:cornflowerblue"> 
+                    <h1> 
+                        SYSPETJA 
+                    </h1>   
+                </center>
+                <h5>
+                    <blockquote>
+
+                        Bem vindo(a)  <h:outputText value="#{loginClienteMB.cliente.nome}" />
+
+                    </blockquote>  
+                </h5>
+
+                <p:menubar> 
+
+                    <p:menuitem value="Início" url="cliente.xhtml" icon="ui-icon-home" />  
+
+                    <p:submenu label="Animais">  
+                        <p:menuitem value="Cadastrar" url="listaAnimaisCliente.xhtml" />
+                    </p:submenu> 
+                    
+                    <p:menuitem value="Sair" icon="ui-icon-close" action="#{loginClienteMB.deslogarC()}"/> 
+
+                </p:menubar>  
+
+            </h:form> 
+            
+            <h:form id="formCadastroAnimal">
+				<h:panelGrid>
+					<p:panel header="Dados do animal">
+						<h:panelGrid columns="2" width="500">
+							<h:outputText value="Nome: "/>
+							<p:inputText id="animalNome" value="#{clienteMB.animal.nome}" maxlength="50" />
+							<h:outputText value="Especie: "/>
+							<p:inputMask id="especie" value="#{clienteMB.animal.especie}" maxlength="50"/>
+							<h:outputText value="Raca: "/>
+							<p:inputText id="raca" value="#{clienteMB.animal.raca}" maxlength="50"/>
+							
+							<h:outputText value="Porte"/>
+							<p:selectOneMenu id="porte" value="#{clienteMB.animal.porte}" style="width:200px" required="true">
+            					<f:selectItem itemLabel="Selecionar" itemValue="" />
+					            <f:selectItem itemLabel="Pequeno" itemValue="Pequeno" />
+					            <f:selectItem itemLabel="Medio" itemValue="Medio" />
+					            <f:selectItem itemLabel="Grande" itemValue="Grande" />
+        					</p:selectOneMenu >
+
+
+							<h:outputText value="Peso: "/>
+							<p:inputText id="peso" value="#{clienteMB.animal.peso}" maxlength="50"/>
+							
+							<p:outputLabel for="dataDeNasc" value="Data de nascimento:" />
+        					<p:calendar id="dataDeNasc" value="#{clienteMB.animal.dataDeNasc}" locale="de" navigator="true" pattern="dd-MM-yyyy" />
+ 
+							
+							
+							<h:outputText value="Sexo: "/>
+							<p:selectOneRadio id="console" value="#{clienteMB.animal.sexo}">
+					            <f:selectItem itemLabel="Masculino" itemValue="Masculino" />
+					            <f:selectItem itemLabel="Feminino" itemValue="Feminino" />
+					        </p:selectOneRadio>
+						</h:panelGrid>
+						
+						<p:separator/>
+						
+						<h:panelGrid columns="2">
+							<p:commandButton id="btGravar" value="GRAVAR" action="#{clienteMB.salvarAnimal(loginClienteMB.cliente)}" ajax="false" />
+	                        <p:commandButton value="CANCELAR" type="reset"/>
+	                       </h:panelGrid>
+					</p:panel>
+				</h:panelGrid>
+			</h:form>
+	  
+	  
+      
+</html>
