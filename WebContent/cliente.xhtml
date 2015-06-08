@@ -40,9 +40,17 @@
 
                     <p:submenu label="Animais">  
                         <p:menuitem value="Cadastrar" url="listaAnimaisCliente.xhtml" />
+                    </p:submenu>
+                    
+                    <p:submenu label="Agenda" >
+                    	<p:menuitem value="Cadastrar" url="newAgendamento.xhtml" />
+                    	<p:menuitem value="Listar agendas" url="listaAgendasCliente.xhtml" />
                     </p:submenu> 
                     
-                    <p:menuitem value="Sair" icon="ui-icon-close" action="#{loginClienteMB.deslogarC()}"/> 
+                    <p:submenu label="#{loginClienteMB.cliente.getNome()}">  
+                        <p:menuitem value="Sair" action="#{loginClienteMB.deslogarC()}" icon="ui-icon-close" />
+                    </p:submenu>
+                    
 
                 </p:menubar>  
 

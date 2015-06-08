@@ -12,7 +12,7 @@
 		<h:form>
 		<p:layoutUnit position="top" >
             <p:menubar>  
-                 <p:menuitem value="Início" url="" icon="ui-icon-home" />  
+                 <p:menuitem value="Início" url="homeSysPetJA.xhtml" icon="ui-icon-home" />  
                     <p:submenu label="Cliente" >
                         <p:menuitem value="Pesquisar" url="/faces/pagPesquisarCliente.xhtml"/>
                         <p:menuitem value="Cadastrar" url="/faces/pagManterCliente.xhtml"/>
@@ -21,16 +21,7 @@
                         <p:menuitem value="Pesquisar" url="/faces/pagPesquisarFuncionario.xhtml"/>
                         <p:menuitem value="Cadastrar" url="/faces/pagManterFuncionario.xhtml"/>
                     </p:submenu>
-                    <p:submenu label="Agendamento" >
-                    	<p:menuitem value="Confirmar agendas"/>
-                        <p:menuitem value="Pesquisar" />
-                        <p:menuitem value="Cadastrar" url="/faces/newAgendamento.xhtml"/>
-                    </p:submenu>
-                    <p:submenu label="Servico" >
-                        <p:menuitem value="Pesquisar" url="/faces/pagPesquisarServico.xhtml"/>
-                        <p:menuitem value="Cadastrar" url="/faces/pagManterServico.xhtml"/>
-                    </p:submenu>
-                    <p:menuitem value="Visão cliente" url="/faces/pagCadastroCliente.xhtml"  />
+                    
                 </p:menubar>
             </p:layoutUnit>
             </h:form>
@@ -63,7 +54,18 @@
 							<p:inputText id="funcCidade" value="#{funcionarioMB.endereco.cidade}" maxlength="50"/>
 							<h:outputText value="Estado: "/>
 							<p:inputText id="funcEstado" value="#{funcionarioMB.endereco.UF}" maxlength="50"/>
+							
+							<p:separator/><p:separator/>
+							
+							<h:outputText value="Email: "/>
+							<p:inputText id="funcEmail" value="#{funcionarioMB.funcionario.email}" maxlength="50"/>
+							<h:outputText value="Senha: "/>
+							<p:password id="funcSenha" value="#{funcionarioMB.funcionario.senha}" maxlength="50"/>
+							
+							
 						</h:panelGrid>
+						
+						
 						
 						<p:separator/>
 						

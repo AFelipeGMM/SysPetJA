@@ -15,6 +15,9 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
  
+
+
+
 import org.primefaces.event.ScheduleEntryMoveEvent;
 import org.primefaces.event.ScheduleEntryResizeEvent;
 import org.primefaces.event.SelectEvent;
@@ -24,8 +27,11 @@ import org.primefaces.model.LazyScheduleModel;
 import org.primefaces.model.ScheduleEvent;
 import org.primefaces.model.ScheduleModel;
 
+import dao.AnimalService;
 import dao.ServicoService;	// dropdown servicos
 import dao.util.JPAUtil;	// dropdown servicos
+import models.Animal;
+import models.Cliente;
 import models.Servico;	// dropdown servicos
  
 @ManagedBean
@@ -37,9 +43,11 @@ public class ScheduleView implements Serializable {
     private ScheduleEvent event = new DefaultScheduleEvent();
     
     private ServicoService servicoService = new ServicoService(JPAUtil.EMF);	// dropdown servicos
-    private Map<String, String> mapaServicos;	// dropdown servicos
+    private AnimalService daoAnimal = new AnimalService(JPAUtil.EMF);
+    private Map<String, String> mapaServicos, mapaAnimais;	// dropdown servicos
     private List<Servico> servicos = new ArrayList<Servico>();	// dropdown servicos
-    private String servico;	// dropdown servicos
+    private String servico;	
+    private String animal;// dropdown servicos
  
     @PostConstruct
     public void init() {
@@ -61,7 +69,18 @@ public class ScheduleView implements Serializable {
         for(Servico s: servicos) {	// dropdown servicos
         	mapaServicos.put(s.getTipo(), s.getTipo());	// dropdown servicos
         }	// dropdown servicos
+        
     }
+    
+    public void iniciarAnimais(Cliente cliente) {
+        List<Animal> animais = cliente.getAnimais();
+        
+        mapaAnimais = new HashMap<String, String>();
+        for(Animal a: animais){
+        	mapaAnimais.put(a.getNome(), a.getNome());
+        }
+    }
+    
      
     public Date getRandomDate(Date base) {
         Calendar date = Calendar.getInstance();
@@ -140,6 +159,10 @@ public class ScheduleView implements Serializable {
     	return this.mapaServicos;
     }
     
+    public Map<String, String> getMapaAnimais(){
+    	return this.mapaAnimais;
+    }
+    
     public void setServico(String servico) {
     	this.servico = servico;
     }
@@ -148,4 +171,12 @@ public class ScheduleView implements Serializable {
     	return this.servico;
     }
     //--------------------------
+
+	public String getAnimal() {
+		return animal;
+	}
+
+	public void setAnimal(String animal) {
+		this.animal = animal;
+	}
 }

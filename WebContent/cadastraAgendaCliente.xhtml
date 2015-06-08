@@ -52,28 +52,21 @@
 				<h:panelGrid>
 					<p:panel header="Dados da agenda">
 						<h:panelGrid columns="2" width="500">
-							<p:outputLabel for="animalCliente" values="Animal: "/>
-							<p:selectOneMenu id="animalCliente" value="#{agendaMB.agenda.animal}" style="width:200xp" required="true">
-								<f:selectItem itemLabel="Selecionar animal" value="" />
-								<f:selectItems value="#{loginClienteMB.cliente.animais}" />
-							</p:selectOneMenu>
-							
-							<p:outputLabel for="servico" value="Servico: "/>
-							<p:selectOneMenu id="servico" value="#{agendaMB.agenda.servico}" style="width:200xp" required="true">
-								<f:selectItem itemLabel="Selecionar servico" value="" />
-								<f:selectItems value="#{agendaMB.mapaServico}" />
-							</p:selectOneMenu>
-							
-							<p:outputLabel for="dataAgenda" value="Data:" />
-        					<p:calendar id="dataAgenda" value="#{agendaMB.agenda.dataAgenda}" locale="de" navigator="true" pattern="dd-MM-yyyy" />
- 							
-							
-							<h:outputText value="Hora marcada: "/>
-							<p:selectOneMenu id="servico" value="#{agendaMB.agenda.horaInicio}" style="width:200px" required="true">
-            					<f:selectItem itemLabel="Selecione horario disponível" itemValue="" />
-					            <f:selectItems value="#{agendaMB.horariosDiscponiveis(animalCliente, dataAgenda)}" />
+							<h:outputText value="Animal"/>
+							<p:selectOneMenu id="animal" value="#{agendaMB.agenda.animal}" style="width:200px" required="true">
+            					<f:selectItem itemLabel="Selecionar animal" itemValue="" />
+					            <f:selectItem itemLabel="animal 1" itemValue="Pequeno" />
+					            <f:selectItem itemLabel="animal 2" itemValue="Medio" />
+					            <f:selectItem itemLabel="animal 3" itemValue="Grande" />
         					</p:selectOneMenu >
-							
+        					
+        					<h:outputText value="Serviço"/>
+							<p:selectOneMenu id="servico" value="#{agendaMB.agenda.servico}" style="width:200px" required="true">
+            					<f:selectItem itemLabel="Selecionar serviço" itemValue="" />
+					            <f:selectItem itemLabel="serviço 1" itemValue="Pequeno" />
+					            <f:selectItem itemLabel="serviço 2" itemValue="Medio" />
+					            <f:selectItem itemLabel="serviço 3" itemValue="Grande" />
+        					</p:selectOneMenu >
 						</h:panelGrid>
 						
 						<p:separator/>
@@ -85,7 +78,9 @@
 					</p:panel>
 				</h:panelGrid>
 			</h:form>
-	  </h:body> 	 </f:view> 
+	  </h:body> 	 
+	  
+	  </f:view> 
 	  
       
 </html>

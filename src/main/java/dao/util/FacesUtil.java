@@ -5,7 +5,9 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
 import bean.ClienteMB;
+import bean.FuncionarioMB;
 import bean.LoginClienteMB;
+import bean.LoginFuncionarioMB;
 
 public class FacesUtil {
 	
@@ -14,6 +16,13 @@ public class FacesUtil {
         Application app = facesContext.getApplication();
         ClienteMB clienteMB = (ClienteMB) app.evaluateExpressionGet(facesContext, "#{clienteMB}",ClienteMB.class);
         return clienteMB;
+    }
+	
+	public static FuncionarioMB getFuncionarioMB(){
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        Application app = facesContext.getApplication();
+        FuncionarioMB funcionarioMB = (FuncionarioMB) app.evaluateExpressionGet(facesContext, "#{funcionarioMB}",FuncionarioMB.class);
+        return funcionarioMB;
     }
     
     /**
@@ -25,6 +34,13 @@ public class FacesUtil {
         Application app = facesContext.getApplication();
         LoginClienteMB loginClienteMB = (LoginClienteMB) app.evaluateExpressionGet(facesContext, "#{loginClienteMB}",LoginClienteMB.class);
         return loginClienteMB;
+    }
+    
+    public static LoginFuncionarioMB getLoginFuncionarioMB(){
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        Application app = facesContext.getApplication();
+        LoginFuncionarioMB loginFuncionarioMB = (LoginFuncionarioMB) app.evaluateExpressionGet(facesContext, "#{loginFuncionarioMB}",LoginFuncionarioMB.class);
+        return loginFuncionarioMB;
     }
     
     /**

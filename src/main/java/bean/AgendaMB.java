@@ -4,6 +4,10 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
+
 import models.Agenda;
 import dao.AgendaService;
 import dao.AnimalService;
@@ -11,6 +15,9 @@ import dao.ServicoService;
 import dao.exceptions.NonexistentEntityException;
 import dao.util.JPAUtil;
 
+@ManagedBean
+@RequestScoped
+@ViewScoped
 public class AgendaMB {
 	private Agenda agenda = new Agenda();
 	public final AgendaService dao = new AgendaService(JPAUtil.EMF);

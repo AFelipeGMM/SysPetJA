@@ -1,0 +1,61 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+
+    <f:view contentType="text/html">
+        <h:head>
+
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Usuario_Funcionario</title>
+            </f:facet>
+
+        </h:head>
+
+        <h:body>
+
+            <h:form>  
+
+                <p:growl id="messages"/>  
+
+                <center for="nome" style="color:cornflowerblue"> 
+                    <h1> 
+                        SYSPETJA 
+                    </h1>   
+                </center>
+                <h5>
+                    <blockquote>
+
+                        Bem vindo(a)  <h:outputText value="#{loginFuncionarioMB.funcionario.nome}" />
+
+                    </blockquote>  
+                </h5>
+
+                <p:menubar> 
+
+                    <p:menuitem value="Início" url="funcionario.xhtml" icon="ui-icon-home" />  
+
+                    <p:submenu label="Animais">  
+                        <p:menuitem value="Cadastrar" url="listaAnimaisFuncionario.xhtml" />
+                    </p:submenu>
+                    
+                    <p:submenu label="Agenda" >
+                    	<p:menuitem value="Cadastrar" url="newAgendamento.xhtml" />
+                    	<p:menuitem value="Listar agendas" url="listaAgendasFuncionario.xhtml" />
+                    </p:submenu> 
+                    
+                    <p:submenu label="#{loginFuncionarioMB.funcionario.getNome()}">  
+                        <p:menuitem value="Sair" action="#{loginFuncionarioMB.deslogarC()}" icon="ui-icon-close" />
+                    </p:submenu>
+                    
+
+                </p:menubar>  
+
+            </h:form> 
+            
+        </h:body>
+    </f:view>
+</html>

@@ -24,22 +24,22 @@
 
                     <form method="post"> 
                             <p:accordionPanel value="LOGIN">  
-                                <p:tab title="LOGIN DO ADMINISTRADOR">  
+                                <p:tab title="LOGIN DO FUNCIONARIO">  
 
-                                    <h:form id="formEntrarAdm">
+                                    <h:form id="formEntrarFuncionario">
 
                                         <br/>
                                         <h:messages style="color:red" />
                                         <h:outputText value="Email : "/>
-                                        <p:inputMask  value="" required="true" requiredMessage="Campo obrigatório" maxlength="10" mask="9999999999" >
-                                        </p:inputMask>
+                                        <p:inputText  value="#{loginFuncionarioMB.funcionario.email}" required="true" requiredMessage="Campo obrigatório" maxlength="50"  >
+                                        </p:inputText>
                                         <br/>
                                         <br/>
                                         <h:outputText value="Senha : "/><p:spacer height="20"/>
-                                        <p:password value="" required="true" requiredMessage="Campo obrigatório" maxlength="30"/>
+                                        <p:password value="#{loginFuncionarioMB.funcionario.senha}" required="true" requiredMessage="Campo obrigatório" maxlength="30"/>
                                         <div/>
                                         <p:spacer height="70"/>
-                                        <h:commandButton value="Entrar" />
+                                        <h:commandButton id="btEntrarFuncionario" value="Entrar" action="#{loginFuncionarioMB.logar()}"/>
 
                                     </h:form>
 
@@ -60,30 +60,12 @@
                                         <p:password  value="#{loginClienteMB.senha}" required="true" requiredMessage="Campo obrigatório" maxlength="30"/>
                                         <div/>
                                         <p:spacer height="70"/>
-                                        <h:commandButton value="Entrar" action="#{loginClienteMB.logar()}"/>
+                                        <h:commandButton id="btEntrarCliente" value="Entrar" action="#{loginClienteMB.logar()}"/>
 
                                     </h:form>
                                 </p:tab>  
 
-                                <p:tab title="LOGIN DO CORRETOR"> 
-                                    <h:form id="formEntrarCor">
-
-                                        <br/>
-                                        <h:messages style="color:red"/>
-                                        <h:outputText value="Email : "/>
-                                        <p:inputMask  value="" required="true" requiredMessage="Campo obrigatório" maxlength="10" mask="9999999999" >
-                                        </p:inputMask>
-                                        <br/>
-                                        <br/>
-                                        <h:outputText value="Senha : "/><p:spacer height="20"/>
-                                        <p:password  value="" required="true" requiredMessage="Campo obrigatório" maxlength="30"/>
-                                        <div/>
-                                        <p:spacer height="70"/>
-                                        <h:commandButton value="Entrar" />
-
-                                    </h:form>
-
-                                </p:tab>  
+                                
 
                             </p:accordionPanel> 
 

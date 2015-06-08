@@ -1,5 +1,6 @@
 package bean;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -11,9 +12,8 @@ import dao.exceptions.NonexistentEntityException;
 import dao.util.JPAUtil;
 import dao.EnderecoService;
 import dao.FuncionarioService;
-import models.Cliente;
-import models.Endereco;
 import models.Funcionario;
+import models.Endereco;
 
 @ManagedBean
 @RequestScoped
@@ -23,7 +23,7 @@ public class FuncionarioMB {
 	private Funcionario funcionario = new Funcionario();
 	public final EnderecoService daoEnd = new EnderecoService(JPAUtil.EMF);
 	public final FuncionarioService dao = new FuncionarioService(JPAUtil.EMF);
-	private String pesquisa;
+	private String funcionarioPesquisado;
 	private List<Funcionario> funcionarios;
 	
 	public void setEndereco(Endereco endereco) {
@@ -44,7 +44,7 @@ public class FuncionarioMB {
 		try {
 			daoEnd.createEndereco(endereco);
 			this.getFuncionario().setEndereco(endereco);
-			dao.createFuncionario(funcionario);
+			dao.create(funcionario);
 		} catch(Exception e) {
 			//TODO
 		}
@@ -67,30 +67,29 @@ public class FuncionarioMB {
         this.setFuncionario(new Funcionario());
     }
     
-    public List<Funcionario> getFuncionarios(){
-        if(pesquisa == null){
-            funcionarios = dao.findFuncionarioEntities();
-        } else if(pesquisa.isEmpty()){
-        	funcionarios = dao.findFuncionarioEntities();
-        } else {
-            pesquisarPorNome();
+    public int pesquisar() {
+        funcionarios = dao.findFuncionarioEntities();
+        return funcionarios.size();
+    }
+
+    public void pesquisarFuncionarios() {
+        funcionarios = new ArrayList<Funcionario>();
+        for (Funcionario a : dao.findFuncionarioEntities()) {
+            if ((a.getEmail().toLowerCase().contains(funcionarioPesquisado) || (a.getNome().toLowerCase().contains(funcionarioPesquisado)))) {
+                funcionarios.add(a);
+
+            }
         }
-        return funcionarios;
+        setFuncionarioPesquisado("");
+       
     }
     
-   
-    public void pesquisarPorNome(){
-    	funcionarios = dao.pesquisarPorNome(pesquisa);
+    public void setFuncionarioPesquisado(String funcionarioPesquisado){
+    	this.funcionarioPesquisado = funcionarioPesquisado;
     }
     
-   
-    public void getTodos(){
-        pesquisa = "";
-        this.getFuncionario();
-    }
-    
-     public void pesquisar() {
-    	 funcionarios = dao.findFuncionarioEntities();
+    public String getFuncionarioPesquisado(){
+    	return funcionarioPesquisado;
     }
 	
 }
