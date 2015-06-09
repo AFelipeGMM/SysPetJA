@@ -60,7 +60,7 @@
 					</p:selectOneMenu >
 					
 					<p:outputLabel for="funcionario" value="Funcionário: " />
-		            <p:selectOneMenu id="funcionario" value="#{scheduleView.funcionario}" style="width:150px">
+		            <p:selectOneMenu id="funcionario" value="#{scheduleView.funcionario}" style="width:200px">
 		                <f:selectItem itemLabel="Selecione o funcionario" itemValue="" noSelectionOption="true" />
 		                <f:selectItems value="#{scheduleView.mapaFuncionarios}" />
 		            </p:selectOneMenu>
@@ -69,6 +69,12 @@
 					<p:inputMask id="data" value="#{scheduleView.event.startDate}" mask="99/99/9999">
                 		<f:convertDateTime pattern="dd/MM/yyyy"/>
             		</p:inputMask>
+            		
+            		<p:outputLabel for="horario" value="Horário: " />
+		            <p:selectOneMenu id="horario" value="#{scheduleView.hora}" style="width:200px">
+		                <f:selectItem itemLabel="" itemValue="" noSelectionOption="true" />
+		                <f:selectItems value="#{scheduleView.horario}"/>
+		            </p:selectOneMenu>
 		            
 		            <p:commandButton id="addButton" value="Concluir" actionListener="#{scheduleView.addEvent}" oncomplete="PF('myschedule').update();PF('eventDialog').hide();" />
 		            <p:commandButton type="reset" value="Limpar" />

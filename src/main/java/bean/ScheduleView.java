@@ -17,6 +17,7 @@ import javax.faces.event.ActionEvent;
  
 
 
+
 import org.primefaces.event.ScheduleEntryMoveEvent;
 import org.primefaces.event.ScheduleEntryResizeEvent;
 import org.primefaces.event.SelectEvent;
@@ -41,6 +42,9 @@ public class ScheduleView implements Serializable {
     private ScheduleEvent event = new DefaultScheduleEvent();
     
     private Map<String, Map<String, String>> data = new HashMap<String, Map<String,String>>();
+    
+    private String hora;
+    private Map<String, String> horario = new HashMap<String, String>();
     
     private ServicoService servicoService = new ServicoService(JPAUtil.EMF);	// dropdown servicos
     private Map<String, String> mapaServicos;	// dropdown servicos
@@ -79,6 +83,12 @@ public class ScheduleView implements Serializable {
         	}
         	data.put(s.getTipo(), map);
         }	// dropdown servicos
+        
+        for(int i = 7; i <= 17; i++) {
+        	if(i != 11 || i != 12) {
+        		horario.put(""+i, ""+i);
+        	}
+        }
     }
      
     public Date getRandomDate(Date base) {
@@ -119,12 +129,15 @@ public class ScheduleView implements Serializable {
         this.event = event;
     }
      
-    public void addEvent(ActionEvent actionEvent) {
+    @SuppressWarnings("deprecation")
+	public void addEvent(ActionEvent actionEvent) {
         if(event.getId() == null)
             eventModel.addEvent(event);
         else
             eventModel.updateEvent(event);
          
+        event.getStartDate().setHours(Integer.parseInt(hora));
+        
         event = new DefaultScheduleEvent();
     }
      
@@ -196,5 +209,21 @@ public class ScheduleView implements Serializable {
 
 	public void setFuncionario(String funcionario) {
 		this.funcionario = funcionario;
+	}
+
+	public Map<String, String> getHorario() {
+		return horario;
+	}
+
+	public void setHorario(Map<String, String> horario) {
+		this.horario = horario;
+	}
+
+	public String getHora() {
+		return hora;
+	}
+
+	public void setHora(String hora) {
+		this.hora = hora;
 	}
 }
