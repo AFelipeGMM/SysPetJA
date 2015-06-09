@@ -1,55 +1,79 @@
 package dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 import dao.exceptions.NonexistentEntityException;
-import models.Cliente;
 import models.Funcionario;
 
-public class FuncionarioService {
+public class FuncionarioService implements Serializable {
 
-	private EntityManagerFactory emf = null;
-	
-	public FuncionarioService(EntityManagerFactory emf) {
-		this.setEMF(emf);
-	}
-	
-	public void createFuncionario(Funcionario funcionario) {
-		EntityManager em = null;
-		
-		try {
-			em = createEntityManager();
-			em.getTransaction().begin();
-			em.persist(funcionario);
-			em.flush();
-			em.refresh(funcionario);
-			em.getTransaction().commit();
-		} catch(Exception e) {
-			//TODO tratar a exception com mais cautela
-			e.printStackTrace();
-		}
-		
-	}
-	
-	public void destroy(long id) throws NonexistentEntityException {
+    public FuncionarioService(EntityManagerFactory emf) {
+        this.emf = emf;
+    }
+    private EntityManagerFactory emf = null;
+
+    public EntityManager getEntityManager() {
+        return emf.createEntityManager();
+    }
+
+    public void create(Funcionario funcionario) {
         EntityManager em = null;
-        
         try {
-            em = emf.createEntityManager();
+            em = getEntityManager();
+            em.getTransaction().begin();
+            em.persist(funcionario);
+            em.getTransaction().commit();
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
+
+    public void edit(Funcionario funcionario) throws NonexistentEntityException, Exception {
+        EntityManager em = null;
+        try {
+            em = getEntityManager();
+            em.getTransaction().begin();
+            funcionario = em.merge(funcionario);
+            em.getTransaction().commit();
+        } catch (Exception ex) {
+            String msg = ex.getLocalizedMessage();
+            if (msg == null || msg.length() == 0) {
+                Long id = funcionario.getId();
+                if (findFuncionario(id) == null) {
+                    throw new NonexistentEntityException("The funcionario with id " + id + " no longer exists.");
+                }
+            }
+            throw ex;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
+
+    public void destroy(Long id) throws NonexistentEntityException {
+        EntityManager em = null;
+        try {
+            em = getEntityManager();
             em.getTransaction().begin();
             Funcionario funcionario;
             try {
-                funcionario = em.getReference(Funcionario.class, id);
-                funcionario.getId();
+            	funcionario = em.getReference(Funcionario.class, id);
+            	funcionario.getId();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("O funcionario com id  " + id + " nao existe.", enfe);
+                throw new NonexistentEntityException("The funcionario with id " + id + " no longer exists.", enfe);
             }
             em.remove(funcionario);
             em.getTransaction().commit();
@@ -59,38 +83,19 @@ public class FuncionarioService {
             }
         }
     }
-	
-	/**
-	 * Utilizado para o retorno da pagina de pesquisa 
-	 * @return a recuperação da pagina de pesquisa
-	 */
-	public List<Funcionario> findFuncionarioEntities() {
+
+    public List<Funcionario> findFuncionarioEntities() {
         return findFuncionarioEntities(true, -1, -1);
-     }
-	
-	/**
-	 * Utilizado para encontrar o numero de funcionario maximo e minimo eu acho
-	 * @param maxResults
-	 * @param firstResult
-	 * @return
-	 */
+    }
 
     public List<Funcionario> findFuncionarioEntities(int maxResults, int firstResult) {
         return findFuncionarioEntities(false, maxResults, firstResult);
     }
-    
-    /**
-     * lista os clientes para a tabela na pagina 
-     * @param all
-     * @param maxResults
-     * @param firstResult
-     * @return
-     */
 
     private List<Funcionario> findFuncionarioEntities(boolean all, int maxResults, int firstResult) {
-        EntityManager em = emf.createEntityManager();
+        EntityManager em = getEntityManager();
         try {
-            CriteriaQuery<Object> cq = em.getCriteriaBuilder().createQuery();
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
             cq.select(cq.from(Funcionario.class));
             Query q = em.createQuery(cq);
             if (!all) {
@@ -102,35 +107,41 @@ public class FuncionarioService {
             em.close();
         }
     }
-    
-    /**
-     * pesquisar os funcionarios pelo nome
-     * @param nome
-     * @return
-     */
-    
-    public List<Funcionario> pesquisarPorNome(String nome) {
-        EntityManager em = emf.createEntityManager();
 
-        TypedQuery<Funcionario> q;
-        q = em.createQuery("select p from Funcionario p where p.nome like :nome",
-                Funcionario.class);
-        q.setParameter("nome", "%" + nome + "%");
-
-        return q.getResultList();
+    public Funcionario findFuncionario(Long id) {
+        EntityManager em = getEntityManager();
+        try {
+            return em.find(Funcionario.class, id);
+        } finally {
+            em.close();
+        }
     }
-	
-	
-	public EntityManager createEntityManager() {
-		return this.getEMF().createEntityManager();
-	}
-	
-	public void setEMF(EntityManagerFactory emf) {
-		this.emf = emf;
-	}
-	
-	public EntityManagerFactory getEMF() {
-		return emf;
-	}
-	
+
+    public int getFuncionarioCount() {
+        EntityManager em = getEntityManager();
+        try {
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            Root<Funcionario> rt = cq.from(Funcionario.class);
+            cq.select(em.getCriteriaBuilder().count(rt));
+            Query q = em.createQuery(cq);
+            return ((Long) q.getSingleResult()).intValue();
+        } finally {
+            em.close();
+        }
+    }
+    
+     public Funcionario findFuncionario(String email, String senha){
+        EntityManager em = getEntityManager();
+        TypedQuery<Funcionario> query;
+        query = em.createQuery("select a from Funcionario a where a.email=:email" +
+                               " and a.senha=:senha", Funcionario.class);
+        query.setParameter("email", email);
+        query.setParameter("senha", senha);
+        try{
+            return query.getSingleResult();
+        }catch(NoResultException e){
+            return null;
+        }
+    }
+    
 }

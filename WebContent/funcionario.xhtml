@@ -1,0 +1,78 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+
+    <f:view contentType="text/html">
+        <h:head>
+
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Usuario_Funcionario</title>
+            </f:facet>
+
+        </h:head>
+
+        <h:body>
+
+            <h:form>  
+
+                <p:growl id="messages"/>  
+
+                <center for="nome" style="color:cornflowerblue"> 
+                    <h1> 
+                        SYSPETJA 
+                    </h1>   
+                </center>
+                <h5>
+                    <blockquote>
+
+                        Bem vindo(a)  <h:outputText value="#{loginPessoaMB.funcionario.nome}" />
+
+                    </blockquote>  
+                </h5>
+
+                <p:menubar> 
+
+                    <p:menuitem value="Início" url="funcionario.xhtml" icon="ui-icon-home" />  
+
+                    <p:submenu label="Agendas">  
+                        <p:menuitem value="Confirmar Agenda" url="" />
+                    </p:submenu> 
+                    
+                    <p:menuitem value="Sair" icon="ui-icon-close" action="#{loginPessoaMB.deslogarC()}"/> 
+
+                </p:menubar>  
+
+            </h:form> 
+
+            <h:form>
+                <br/>
+
+                <p:fieldset legend="INFORMAÇÕES">
+
+                    <br/>
+                    Nome: <h:outputText value="${loginPessoaMB.funcionario.nome}"/>
+                    <br/>
+                    Email: <h:outputText value="${loginPessoaMB.funcionario.email}"/>
+                    <br/>
+
+                </p:fieldset>
+
+            </h:form>
+
+            <br/>
+            
+            <br/>
+            <p:fieldset legend="LISTA DE AGENDAS" style="color: cornflowerblue">
+                
+            </p:fieldset>
+
+            <br/>
+
+        </h:body>
+
+    </f:view>
+</html>

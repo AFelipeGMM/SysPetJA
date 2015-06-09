@@ -5,7 +5,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
 import bean.ClienteMB;
-import bean.LoginClienteMB;
+import bean.FuncionarioMB;
+import bean.LoginPessoaMB;
 
 public class FacesUtil {
 	
@@ -15,16 +16,31 @@ public class FacesUtil {
         ClienteMB clienteMB = (ClienteMB) app.evaluateExpressionGet(facesContext, "#{clienteMB}",ClienteMB.class);
         return clienteMB;
     }
+	
+	public static FuncionarioMB getFuncionarioMB(){
+		 FacesContext facesContext = FacesContext.getCurrentInstance();
+	        Application app = facesContext.getApplication();
+	        FuncionarioMB funcionarioMB = (FuncionarioMB) app.evaluateExpressionGet(facesContext, "#{funcionarioMB}",FuncionarioMB.class);
+	        return funcionarioMB;
+	}
     
     /**
      * Pega a instância atual do LoginClienteMB.
      * @return o LoginClienteMB da sessão. 
-     */
+     *
     public static LoginClienteMB getLoginClienteMB(){
         FacesContext facesContext = FacesContext.getCurrentInstance();
         Application app = facesContext.getApplication();
         LoginClienteMB loginClienteMB = (LoginClienteMB) app.evaluateExpressionGet(facesContext, "#{loginClienteMB}",LoginClienteMB.class);
         return loginClienteMB;
+    }
+    **/
+    
+    public static LoginPessoaMB getLoginPessoaMB(){
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        Application app = facesContext.getApplication();
+        LoginPessoaMB loginPessoaMB = (LoginPessoaMB) app.evaluateExpressionGet(facesContext, "#{loginPessoaMB}",LoginPessoaMB.class);
+        return loginPessoaMB;
     }
     
     /**

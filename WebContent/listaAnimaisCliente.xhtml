@@ -29,20 +29,20 @@
                 <h5>
                     <blockquote>
 
-                        Bem vindo(a)  <h:outputText value="#{loginClienteMB.cliente.nome}" />
+                        Bem vindo(a)  <h:outputText value="#{loginPessoaMB.cliente.nome}" />
 
                     </blockquote>  
                 </h5>
 
                 <p:menubar> 
 
-                    <p:menuitem value="Início" url="cliente.xhtml" icon="ui-icon-home" action="loginClienteMB.setCliente(loginClienteMB.cliente)"/>  
+                    <p:menuitem value="Início" url="cliente.xhtml" icon="ui-icon-home" action="loginPessoaMB.setCliente(loginPessoaMB.cliente)"/>  
 
                     <p:submenu label="Lista de Animais">  
                         <p:menuitem value="Animais" url="listaAnimaisCliente.xhtml" />
                     </p:submenu> 
 
-                    <p:menuitem value="Sair" icon="ui-icon-close" action="#{loginClienteMB.deslogarC()}"/>  
+                    <p:menuitem value="Sair" icon="ui-icon-close" action="#{loginPessoaMB.deslogarC()}"/>  
 
                 </p:menubar>  
 
@@ -87,7 +87,7 @@
 						<p:separator/>
 						
 						<h:panelGrid columns="2">
-							<p:commandButton id="btGravar" value="GRAVAR" action="#{clienteMB.salvarAnimal(loginClienteMB.cliente)}" ajax="false" />
+							<p:commandButton id="btGravar" value="GRAVAR" action="#{clienteMB.salvarAnimal(loginPessoaMB.cliente)}" ajax="false" />
 	                        <p:commandButton value="CANCELAR" type="reset"/>
 	                       </h:panelGrid>
 					</p:panel>

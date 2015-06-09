@@ -13,11 +13,12 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 import dao.exceptions.NonexistentEntityException;
-import models.Cliente;
+import models.Pessoa;
 
-public class ClienteService implements Serializable {
 
-    public ClienteService(EntityManagerFactory emf) {
+public class PessoaService implements Serializable {
+
+    public PessoaService(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
@@ -26,12 +27,12 @@ public class ClienteService implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Cliente cliente) {
+    public void create(Pessoa pessoa) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(cliente);
+            em.persist(pessoa);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -40,19 +41,19 @@ public class ClienteService implements Serializable {
         }
     }
 
-    public void edit(Cliente cliente) throws NonexistentEntityException, Exception {
+    public void edit(Pessoa pessoa) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            cliente = em.merge(cliente);
+            pessoa = em.merge(pessoa);
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Long id = cliente.getId();
-                if (findCliente(id) == null) {
-                    throw new NonexistentEntityException("The cliente with id " + id + " no longer exists.");
+                Long id = pessoa.getId();
+                if (findPessoa(id) == null) {
+                    throw new NonexistentEntityException("The pessoa with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -68,14 +69,14 @@ public class ClienteService implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Cliente cliente;
+            Pessoa pessoa;
             try {
-            	cliente = em.getReference(Cliente.class, id);
-            	cliente.getId();
+            	pessoa = em.getReference(Pessoa.class, id);
+            	pessoa.getId();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The cliente with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The pessoa with id " + id + " no longer exists.", enfe);
             }
-            em.remove(cliente);
+            em.remove(pessoa);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -84,19 +85,19 @@ public class ClienteService implements Serializable {
         }
     }
 
-    public List<Cliente> findClienteEntities() {
-        return findClienteEntities(true, -1, -1);
+    public List<Pessoa> findPessoaEntities() {
+        return findPessoaEntities(true, -1, -1);
     }
 
-    public List<Cliente> findClienteEntities(int maxResults, int firstResult) {
-        return findClienteEntities(false, maxResults, firstResult);
+    public List<Pessoa> findPessoaEntities(int maxResults, int firstResult) {
+        return findPessoaEntities(false, maxResults, firstResult);
     }
 
-    private List<Cliente> findClienteEntities(boolean all, int maxResults, int firstResult) {
+    private List<Pessoa> findPessoaEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Cliente.class));
+            cq.select(cq.from(Pessoa.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -108,20 +109,20 @@ public class ClienteService implements Serializable {
         }
     }
 
-    public Cliente findCliente(Long id) {
+    public Pessoa findPessoa(Long id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Cliente.class, id);
+            return em.find(Pessoa.class, id);
         } finally {
             em.close();
         }
     }
 
-    public int getClienteCount() {
+    public int getPessoaCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Cliente> rt = cq.from(Cliente.class);
+            Root<Pessoa> rt = cq.from(Pessoa.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
@@ -130,11 +131,11 @@ public class ClienteService implements Serializable {
         }
     }
     
-     public Cliente findCliente2(String email, String senha){
+     public Pessoa findPessoa(String email, String senha){
         EntityManager em = getEntityManager();
-        TypedQuery<Cliente> query;
-        query = em.createQuery("select a from Cliente a where a.email=:email" +
-                               " and a.senha=:senha", Cliente.class);
+        TypedQuery<Pessoa> query;
+        query = em.createQuery("select a from Pessoa a where a.email=:email" +
+                               " and a.senha=:senha", Pessoa.class);
         query.setParameter("email", email);
         query.setParameter("senha", senha);
         try{

@@ -41,7 +41,7 @@ public class ClienteMB {
     private String clientePesquisado;
     private Animal animal = new Animal();
     private List<Animal> animais = new ArrayList<Animal>();
-    private LoginClienteMB clienteLogado = new LoginClienteMB();
+   
 
     public ClienteMB() {
         pesquisar();
@@ -95,10 +95,10 @@ public class ClienteMB {
         pesquisar();
     }
 
-    public void excluir() {
+    public void excluir(long idCliente, long idEndereco) {
         try {
-            dao.destroy(cliente.getId());
-            daoEndereco.destroy(endereco.getId());
+            dao.destroy(idCliente);
+            daoEndereco.destroy(idEndereco);
             setMensagemExclusao(this.cliente.getNome() + "  foi excluído(a) com sucesso!");
             cliente = new Cliente();
         } catch (NonexistentEntityException ex) {
@@ -208,11 +208,5 @@ public class ClienteMB {
 		this.animal = animal;
 	}
 
-	public LoginClienteMB getClienteLogado() {
-		return clienteLogado;
-	}
-
-	public void setClienteLogado(LoginClienteMB clienteLogado) {
-		this.clienteLogado = clienteLogado;
-	}
+	
 }

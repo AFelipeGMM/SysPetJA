@@ -4,40 +4,60 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import models.Cliente;
+import models.Funcionario;
+import models.Pessoa;
 import dao.ClienteService;
+import dao.FuncionarioService;
 import dao.util.FacesUtil;
 import dao.util.JPAUtil;
 
 @ManagedBean
 @SessionScoped
-public class LoginClienteMB {
+public class LoginPessoaMB {
 
     private Cliente cliente = new Cliente();
+    
+    private Funcionario funcionario = new Funcionario();
+    
+    private String tipoPessoa = "";
     
     private String email ="";
     
     private String senha="";
     
-    private ClienteService dao = new ClienteService(JPAUtil.EMF);
+    private ClienteService daoCliente = new ClienteService(JPAUtil.EMF);
+    
+    private FuncionarioService daoFuncionario = new FuncionarioService(JPAUtil.EMF);
     
     private boolean logado = false;
     
     private String mensagem;
     
     
-    public LoginClienteMB() {
+    
+    public LoginPessoaMB() {
     }
     
     public boolean validarLogin(){
-        Cliente a = dao.findCliente(email, senha);
+        Cliente a = daoCliente.findCliente2(email, senha);
+        Funcionario f = daoFuncionario.findFuncionario(email, senha);
+        
         if (a != null){
             cliente = a;
             ClienteMB umb = FacesUtil.getClienteMB();
             umb.setCliente(cliente);
+            tipoPessoa = "cliente";
       
             return true;
-        } else {
-            return false;
+        } else if(f != null){
+        	funcionario = f;
+        	FuncionarioMB fmb = FacesUtil.getFuncionarioMB();
+        	fmb.setFuncionario(funcionario);
+        	tipoPessoa = "funcionario";
+        	
+            return true;
+        } else{
+        	return false;
         }
     }
 
@@ -97,13 +117,23 @@ public class LoginClienteMB {
      * @return a página inicial da sessao do aluno.
      */
     public String logar(){
-       boolean aux = validarLogin(); 
-        if (aux== true){         
-            return "/cliente.xhtml";
-        } else {
-            FacesUtil.adicionarMensagem("formEntrarCliente", "Email e senha não conferem !");
-            return null;
-        }
+    	boolean aux = validarLogin();
+    	
+    	if(tipoPessoa.equals("cliente")){
+	        if (aux== true){         
+	            return "/cliente.xhtml";
+	        } else {
+	            FacesUtil.adicionarMensagem("formEntrarPessoa", "Email e senha não conferem !");
+	            return null;
+	        }
+    	}else{
+	        if (aux== true){         
+	            return "/funcionario.xhtml";
+	        } else {
+	            FacesUtil.adicionarMensagem("formEntrarPessoa", "Email e senha não conferem !");
+	            return null;
+	        }
+    	}
     }
     
     /**
@@ -113,8 +143,10 @@ public class LoginClienteMB {
     public String deslogarC(){
         setDeslogado();
         cliente = new Cliente();
+        funcionario = new Funcionario();
         email = null;        
         senha = null;
+        tipoPessoa = "";
         return "/homeSysPetJA.xhtml";
     }
     
@@ -131,4 +163,20 @@ public class LoginClienteMB {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+
+	public String getTipoPessoa() {
+		return tipoPessoa;
+	}
+
+	public void setTipoPessoa(String tipoPessoa) {
+		this.tipoPessoa = tipoPessoa;
+	}
+	
+	public void setFuncionario(Funcionario funcionario){
+		this.funcionario = funcionario;
+	}
+	
+	public Funcionario getFuncionario(){
+		return funcionario;
+	}
 }

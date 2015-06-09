@@ -63,6 +63,16 @@
 							<p:inputText id="funcCidade" value="#{funcionarioMB.endereco.cidade}" maxlength="50"/>
 							<h:outputText value="Estado: "/>
 							<p:inputText id="funcEstado" value="#{funcionarioMB.endereco.UF}" maxlength="50"/>
+						
+						<p:separator/><p:separator/>
+						
+							<h:outputText value="Email: " />
+						<p:inputText id="clienteLogin" value="#{funcionarioMB.funcionario.email}"
+							maxlength="50" required="true" label="Email" />
+						
+						<h:outputText value="Senha: " />
+						<p:password id="clienteSenha" value="#{funcionarioMB.funcionario.senha}"
+							maxlength="50" required="true" label="Senha"/>
 						</h:panelGrid>
 						
 						<p:separator/>

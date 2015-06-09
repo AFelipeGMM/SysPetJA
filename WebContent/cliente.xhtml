@@ -29,7 +29,7 @@
                 <h5>
                     <blockquote>
 
-                        Bem vindo(a)  <h:outputText value="#{loginClienteMB.cliente.nome}" />
+                        Bem vindo(a)  <h:outputText value="#{loginPessoaMB.cliente.nome}" />
 
                     </blockquote>  
                 </h5>
@@ -42,7 +42,7 @@
                         <p:menuitem value="Cadastrar" url="listaAnimaisCliente.xhtml" />
                     </p:submenu> 
                     
-                    <p:menuitem value="Sair" icon="ui-icon-close" action="#{loginClienteMB.deslogarC()}"/> 
+                    <p:menuitem value="Sair" icon="ui-icon-close" action="#{loginPessoaMB.deslogarC()}"/> 
 
                 </p:menubar>  
 
@@ -54,9 +54,9 @@
                 <p:fieldset legend="INFORMAÇÕES">
 
                     <br/>
-                    Nome: <h:outputText value="${loginClienteMB.cliente.nome}"/>
+                    Nome: <h:outputText value="${loginPessoaMB.cliente.nome}"/>
                     <br/>
-                    Email: <h:outputText value="${loginClienteMB.cliente.email}"/>
+                    Email: <h:outputText value="${loginPessoaMB.cliente.email}"/>
                     <br/>
 
                 </p:fieldset>
@@ -67,7 +67,7 @@
             
             <br/>
             <p:fieldset legend="LISTA DE ANIMAIS" style="color: cornflowerblue">
-                <p:dataTable id="tabelaAni" value="#{loginClienteMB.cliente.animais}" var="animal" paginator="true" rows="10"  
+                <p:dataTable id="tabelaAni" value="#{loginPessoaMB.cliente.animais}" var="animal" paginator="true" rows="10"  
                              paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
 
                     <p:column  >
