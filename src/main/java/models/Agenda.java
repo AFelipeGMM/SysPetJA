@@ -29,7 +29,7 @@ public class Agenda implements Serializable{
 	
 	private Animal animal;
 	private Servico servico;
-	private boolean Status = false;
+	private boolean Status = false; //serve para confirmar 
 	
 	public Animal getAnimal() {
 		return animal;
@@ -50,6 +50,8 @@ public class Agenda implements Serializable{
 		Status = status;
 	}
 	
-	
+	public long getId(){
+		return id;
+	}
 
 }

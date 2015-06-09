@@ -5,7 +5,6 @@
 package models;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -18,6 +17,7 @@ public class Funcionario extends Pessoa implements Serializable{
 	private String cargo;
 	private double salario;
 	private List<Agenda> agendas;
+	private List<Servico> servicos;
 	
 	public Funcionario() {
 		
@@ -48,6 +48,18 @@ public class Funcionario extends Pessoa implements Serializable{
 	}
 	public void addAgenda(Agenda agenda){
 		agendas.add(agenda);
+	}
+
+	public List<Servico> getServicos() {
+		return servicos;
+	}
+
+	public void setServicos(List<Servico> servicos) {
+		this.servicos = servicos;
+	}
+	
+	public void addServico(Servico servico){
+		servicos.add(servico);
 	}
 	
 }
