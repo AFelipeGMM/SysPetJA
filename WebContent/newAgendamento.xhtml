@@ -33,12 +33,13 @@
                 </p:menubar>
             </p:layoutUnit>
             </h:form>
+            
 		<h:form>
 		    <p:growl id="messages" showDetail="true" />
 		 
 		    <h:panelGrid columnClasses="value">
-		        <h3 style="margin-top: 0">Editable Schedule</h3>
-		        <p:schedule id="schedule" value="#{scheduleView.eventModel}" widgetVar="myschedule" timeZone="GMT+2">
+		        <h3 style="margin-top: 0">*</h3>
+		        <p:schedule id="schedule" value="#{scheduleView.eventModel}" widgetVar="myschedule" timeZone="GMT-4">
 		 
 		            <p:ajax event="dateSelect" listener="#{scheduleView.onDateSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
 		            <p:ajax event="eventSelect" listener="#{scheduleView.onEventSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
@@ -50,17 +51,31 @@
 		 
 		    <p:dialog widgetVar="eventDialog" header="Novo Serviço" showEffect="clip" hideEffect="clip">
 		        <h:panelGrid id="eventDetails" columns="2">
+		        
 		            <h:outputText for="servico" value="Serviço"/>
 		            <p:selectOneMenu id="servico" value="#{scheduleView.servico}" style="width:200px" required="true">
-            					<f:selectItem itemLabel="Selecione o servico" itemValue="" />
-					            <f:selectItems value="#{scheduleView.mapaServicos}" />
-        					</p:selectOneMenu >
+		            	<p:ajax listener="#{scheduleView.onServicoChange}" update="funcionario" />
+						<f:selectItem itemLabel="Selecione o servico" itemValue="" />
+						<f:selectItems value="#{scheduleView.mapaServicos}" />
+					</p:selectOneMenu >
+					
+					<p:outputLabel for="funcionario" value="Funcionário: " />
+		            <p:selectOneMenu id="funcionario" value="#{scheduleView.funcionario}" style="width:150px">
+		                <f:selectItem itemLabel="Selecione o funcionario" itemValue="" noSelectionOption="true" />
+		                <f:selectItems value="#{scheduleView.mapaFuncionarios}" />
+		            </p:selectOneMenu>
+					
+					<h:outputLabel for="data" value="Data:" />
+					<p:inputMask id="data" value="#{scheduleView.event.startDate}" mask="99/99/9999">
+                		<f:convertDateTime pattern="dd/MM/yyyy"/>
+            		</p:inputMask>
 		            
 		            <p:commandButton id="addButton" value="Concluir" actionListener="#{scheduleView.addEvent}" oncomplete="PF('myschedule').update();PF('eventDialog').hide();" />
 		            <p:commandButton type="reset" value="Limpar" />
 		        </h:panelGrid>
-		    </p:dialog>    
+		    </p:dialog>   
+		     
 		</h:form>
+		
 	</h:body>
-      
 </html>

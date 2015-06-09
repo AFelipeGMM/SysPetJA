@@ -15,6 +15,8 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
  
+
+
 import org.primefaces.event.ScheduleEntryMoveEvent;
 import org.primefaces.event.ScheduleEntryResizeEvent;
 import org.primefaces.event.SelectEvent;
@@ -24,8 +26,10 @@ import org.primefaces.model.LazyScheduleModel;
 import org.primefaces.model.ScheduleEvent;
 import org.primefaces.model.ScheduleModel;
 
+import dao.FuncionarioService;
 import dao.ServicoService;	// dropdown servicos
 import dao.util.JPAUtil;	// dropdown servicos
+import models.Funcionario;
 import models.Servico;	// dropdown servicos
  
 @ManagedBean
@@ -36,10 +40,17 @@ public class ScheduleView implements Serializable {
     private ScheduleModel lazyEventModel;
     private ScheduleEvent event = new DefaultScheduleEvent();
     
+    private Map<String, Map<String, String>> data = new HashMap<String, Map<String,String>>();
+    
     private ServicoService servicoService = new ServicoService(JPAUtil.EMF);	// dropdown servicos
     private Map<String, String> mapaServicos;	// dropdown servicos
     private List<Servico> servicos = new ArrayList<Servico>();	// dropdown servicos
     private String servico;	// dropdown servicos
+    
+    private FuncionarioService funcionarioService = new FuncionarioService(JPAUtil.EMF);
+    private Map<String, String> mapaFuncionarios;
+    private List<Funcionario> funcionarios = new ArrayList<Funcionario>();
+    private String funcionario;
  
     @PostConstruct
     public void init() {
@@ -57,9 +68,16 @@ public class ScheduleView implements Serializable {
         };
         
         servicos = servicoService.findServicoEntities();  // dropdown servicos
+        funcionarios = funcionarioService.findFuncionarioEntities();
         mapaServicos = new HashMap<String, String>();	// dropdown servicos
+        Map<String, String> map = new HashMap<String, String>();
         for(Servico s: servicos) {	// dropdown servicos
         	mapaServicos.put(s.getTipo(), s.getTipo());	// dropdown servicos
+        	map = new HashMap<String, String>();
+        	for(Funcionario f: funcionarios) {
+        		map.put(f.getNome(), f.getNome());
+        	}
+        	data.put(s.getTipo(), map);
         }	// dropdown servicos
     }
      
@@ -129,6 +147,13 @@ public class ScheduleView implements Serializable {
          
         addMessage(message);
     }
+    
+    public void onServicoChange() {
+        if(servico !=null && !servico.equals(""))
+            mapaFuncionarios = data.get(servico);
+        else
+        	mapaFuncionarios = new HashMap<String, String>();
+    }
      
     private void addMessage(FacesMessage message) {
         FacesContext.getCurrentInstance().addMessage(null, message);
@@ -148,4 +173,28 @@ public class ScheduleView implements Serializable {
     	return this.servico;
     }
     //--------------------------
+
+	public Map<String, String> getMapaFuncionarios() {
+		return mapaFuncionarios;
+	}
+
+	public void setMapaFuncionarios(Map<String, String> mapaFuncionarios) {
+		this.mapaFuncionarios = mapaFuncionarios;
+	}
+
+	public List<Funcionario> getFuncionarios() {
+		return funcionarios;
+	}
+
+	public void setFuncionarios(List<Funcionario> funcionarios) {
+		this.funcionarios = funcionarios;
+	}
+
+	public String getFuncionario() {
+		return funcionario;
+	}
+
+	public void setFuncionario(String funcionario) {
+		this.funcionario = funcionario;
+	}
 }
