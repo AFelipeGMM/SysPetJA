@@ -14,6 +14,7 @@ import javax.persistence.criteria.Root;
 
 import dao.exceptions.NonexistentEntityException;
 import models.Funcionario;
+import models.Servico;
 
 public class FuncionarioService implements Serializable {
 
@@ -106,6 +107,23 @@ public class FuncionarioService implements Serializable {
         } finally {
             em.close();
         }
+    }
+    
+    /**
+     * pesquisar os funcionario pelo nome
+     * @param nome
+     * @return
+     */
+    
+    public List<Funcionario> pesquisarPorNome(String nome) {
+        EntityManager em = emf.createEntityManager();
+
+        TypedQuery<Funcionario> q;
+        q = em.createQuery("select p from Servico p where p.nome like :nome",
+        		Funcionario.class);
+        q.setParameter("nome", "%" + nome + "%");
+
+        return q.getResultList();
     }
 
     public Funcionario findFuncionario(Long id) {

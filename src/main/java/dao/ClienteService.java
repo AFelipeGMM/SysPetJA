@@ -130,6 +130,23 @@ public class ClienteService implements Serializable {
         }
     }
     
+    /**
+     * pesquisar os cliente pelo nome
+     * @param nome
+     * @return
+     */
+    
+    public List<Cliente> pesquisarPorNome(String nome) {
+        EntityManager em = emf.createEntityManager();
+
+        TypedQuery<Cliente> q;
+        q = em.createQuery("select p from Servico p where p.nome like :nome",
+        		Cliente.class);
+        q.setParameter("nome", "%" + nome + "%");
+
+        return q.getResultList();
+    }
+    
      public Cliente findCliente2(String email, String senha){
         EntityManager em = getEntityManager();
         TypedQuery<Cliente> query;
