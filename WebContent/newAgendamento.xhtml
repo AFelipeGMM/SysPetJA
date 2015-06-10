@@ -7,30 +7,24 @@
 		<title>SysPetJA - Agendamento</title>
 	</h:head>
 	
-	<h:body>
+	<h:body> 
 	
 	<h:form>
 		<p:layoutUnit position="top" >
-            <p:menubar>  
-                 <p:menuitem value="Início" url="" icon="ui-icon-home" />  
-                    <p:submenu label="Cliente" >
-                        <p:menuitem value="Pesquisar" url="/faces/pagPesquisarCliente.xhtml"/>
-                        <p:menuitem value="Cadastrar" url="/faces/pagManterCliente.xhtml"/>
+           <p:menubar> 
+
+                    <p:menuitem value="Início" url="cliente.xhtml" icon="ui-icon-home" />  
+
+                    <p:submenu label="Animais">  
+                        <p:menuitem value="Cadastrar" url="listaAnimaisCliente.xhtml" />
+                    </p:submenu> 
+                    
+                    <p:submenu label="Agenda">  
+                        <p:menuitem value="Cadastrar" url="newAgendamento.xhtml" action="#{scheduleView.listaAnimalClienteLogado(clienteMB.getCliente())}"/>
                     </p:submenu>
-                    <p:submenu label="Funcionario" >
-                        <p:menuitem value="Pesquisar" />
-                        <p:menuitem value="Cadastrar" url="/faces/pagManterFuncionario.xhtml"/>
-                    </p:submenu>
-                    <p:submenu label="Agendamento" >
-                    	<p:menuitem value="Confirmar agendas"/>
-                        <p:menuitem value="Pesquisar" />
-                        <p:menuitem value="Cadastrar" url="/faces/newAgendamento.xhtml"/>
-                    </p:submenu>
-                    <p:submenu label="Servico" >
-                        <p:menuitem value="Pesquisar" />
-                        <p:menuitem value="Cadastrar" url="/faces/pagManterServico.xhtml"/>
-                    </p:submenu>
-                </p:menubar>
+                    <p:menuitem value="Sair" icon="ui-icon-close" action="#{loginPessoaMB.deslogarC()}"/> 
+
+                </p:menubar>  
             </p:layoutUnit>
             </h:form>
             
@@ -51,6 +45,12 @@
 		 
 		    <p:dialog widgetVar="eventDialog" header="Novo Serviço" showEffect="clip" hideEffect="clip">
 		        <h:panelGrid id="eventDetails" columns="2">
+		        
+		        	<h:outputText for="animal" value="Animal"/>
+		            <p:selectOneMenu id="animal" value="#{scheduleView.animal}" style="width:200px" required="true">
+						<f:selectItem itemLabel="Selecione o animal" itemValue="" />
+						<f:selectItems value="#{scheduleView.mapaAnimais}" />
+					</p:selectOneMenu >
 		        
 		            <h:outputText for="servico" value="Serviço"/>
 		            <p:selectOneMenu id="servico" value="#{scheduleView.servico}" style="width:200px" required="true">

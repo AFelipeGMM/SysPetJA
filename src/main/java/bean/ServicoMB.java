@@ -10,6 +10,7 @@ import javax.faces.bean.RequestScoped;
 import dao.ServicoService;
 import dao.exceptions.NonexistentEntityException;
 import dao.util.JPAUtil;
+import dao.util.Validation;
 import models.Servico;
 
 
@@ -21,6 +22,7 @@ public class ServicoMB {
 	public final ServicoService dao = new ServicoService(JPAUtil.EMF);
 	private String pesquisa;
 	private List<Servico> servicos;
+	private String mensagem = "";
 	
 	public Servico getServico() {
 		return servico;
@@ -31,8 +33,12 @@ public class ServicoMB {
 	}
 
 	public void salvar(){
+		Validation validacao = new Validation();
 		try {
 			dao.createServico(servico);
+			this.setMensagem(this.servico.getTipo() + " cadastrado(a) com sucesso! ");
+            validacao.mensagemConfirmarCadastro(mensagem);
+            servico = new Servico();
 		} catch (Exception ex) {
 			// TODO: handle exception
 		}
@@ -79,4 +85,12 @@ public class ServicoMB {
      public void pesquisar() {
         servicos = dao.findServicoEntities();
     }
+
+	public String getMensagem() {
+		return mensagem;
+	}
+
+	public void setMensagem(String mensagem) {
+		this.mensagem = mensagem;
+	}
 }

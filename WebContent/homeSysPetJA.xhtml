@@ -16,8 +16,11 @@
 
             <p:layout fullPage="true">
 
-                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
+                <p:layoutUnit position="north" size="120" resizable="true" closable="true" collapsible="true">
                     <center><p:graphicImage library="imagens" name="logoMarca.png"></p:graphicImage></center>                     
+                	<p:menubar  >
+                		<p:menuitem  value="Cadastre-se" url="pagCadastroCliente.xhtml"></p:menuitem>
+                	</p:menubar>
                 </p:layoutUnit>
 
                 <p:layoutUnit position="center" resizable="true" visible="true">
@@ -45,11 +48,13 @@
                                 </p:tab>  
 
                     </form>
+                    
+                    <center><p:graphicImage library="imagens" name="furry-friends-crop.jpg"></p:graphicImage></center>
 
                 </p:layoutUnit>
 
                 <p:layoutUnit position="south" resizable="false">
-                   <center><p:graphicImage library="imagens" name="furry-friends-crop.jpg"></p:graphicImage></center>                     
+                                        
                 </p:layoutUnit>
 
             </p:layout>

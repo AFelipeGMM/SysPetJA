@@ -15,33 +15,32 @@
         <h:body>
        
 		<h:form>
-		<p:layoutUnit position="top" >
-            <p:menubar>  
+		<p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true" style="border: 0;">
+                    <center><p:graphicImage library="imagens" name="logoMarca.png"></p:graphicImage></center>                     
+        </p:layoutUnit>
+		<p:layoutUnit position="top">
+			<p:menubar>  
                  <p:menuitem value="Início" url="" icon="ui-icon-home" />  
                     <p:submenu label="Cliente" >
                         <p:menuitem value="Pesquisar" url="/faces/pagPesquisarCliente.xhtml"/>
-                        <p:menuitem value="Cadastrar" url="/faces/pagManterCliente.xhtml"/>
+                        <p:menuitem value="Cadastrar" url="/faces/pagCadastroCliente.xhtml"/>
                     </p:submenu>
                     <p:submenu label="Funcionario" >
                         <p:menuitem value="Pesquisar" url="/faces/pagPesquisarFuncionario.xhtml"/>
                         <p:menuitem value="Cadastrar" url="/faces/pagManterFuncionario.xhtml"/>
                     </p:submenu>
-                    <p:submenu label="Agendamento" >
-                    	<p:menuitem value="Confirmar agendas"/>
-                        <p:menuitem value="Pesquisar" />
-                        <p:menuitem value="Cadastrar" url="/faces/newAgendamento.xhtml"/>
-                    </p:submenu>
                     <p:submenu label="Servico" >
                         <p:menuitem value="Pesquisar" url="/faces/pagPesquisarServico.xhtml"/>
                         <p:menuitem value="Cadastrar" url="/faces/pagManterServico.xhtml"/>
                     </p:submenu>
-                    <p:menuitem value="Visão cliente" url="/faces/pagCadastroCliente.xhtml"  />
+                    
                 </p:menubar>
-            </p:layoutUnit>
-            </h:form>
+		</p:layoutUnit>
+	</h:form>
             
             <center>
                 <h:form id="formulario">
+                	<p:messages id="msgs" />
                     <h:panelGrid>
                         <p:panel header="Cadastrar servico">
                             <h:panelGrid columns="2">
@@ -51,7 +50,7 @@
                                 <p:inputText id="valor" value="#{servicoMB.servico.valor}" maxlength="50"/>
                                  <h:outputText value="Duração do servico: "/>  
                                 <p:inputText id="duracao" value="#{servicoMB.servico.duracao}" maxlength="50"/>                                                       
-						<p:separator></p:separator>
+						<p:separator /> <p:separator />
                                 <p:commandButton value="GRAVAR" action="#{servicoMB.salvar()}" ajax="false"/>
                                 <p:commandButton value="CANCELAR" type="reset"/>
                             </h:panelGrid>

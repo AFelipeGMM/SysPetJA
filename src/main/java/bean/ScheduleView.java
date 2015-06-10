@@ -18,6 +18,10 @@ import javax.faces.event.ActionEvent;
 
 
 
+
+
+
+
 import org.primefaces.event.ScheduleEntryMoveEvent;
 import org.primefaces.event.ScheduleEntryResizeEvent;
 import org.primefaces.event.SelectEvent;
@@ -27,9 +31,13 @@ import org.primefaces.model.LazyScheduleModel;
 import org.primefaces.model.ScheduleEvent;
 import org.primefaces.model.ScheduleModel;
 
+import dao.AnimalService;
 import dao.FuncionarioService;
 import dao.ServicoService;	// dropdown servicos
 import dao.util.JPAUtil;	// dropdown servicos
+import models.Agenda;
+import models.Animal;
+import models.Cliente;
 import models.Funcionario;
 import models.Servico;	// dropdown servicos
  
@@ -43,6 +51,9 @@ public class ScheduleView implements Serializable {
     
     private Map<String, Map<String, String>> data = new HashMap<String, Map<String,String>>();
     
+    private Agenda angenda = new Agenda();
+    private AgendaMB agendaMB = new AgendaMB();
+    
     private String hora;
     private Map<String, String> horario = new HashMap<String, String>();
     
@@ -55,7 +66,14 @@ public class ScheduleView implements Serializable {
     private Map<String, String> mapaFuncionarios;
     private List<Funcionario> funcionarios = new ArrayList<Funcionario>();
     private String funcionario;
- 
+    
+    private AnimalService daoAnimal = new AnimalService(JPAUtil.EMF);
+    private List<Animal> animais;
+    private Map<String, String> mapaAnimais = new HashMap<String, String>();
+    private String animal;
+    
+    private Cliente cliente = new Cliente();
+    
     @PostConstruct
     public void init() {
         eventModel = new DefaultScheduleModel();
@@ -89,7 +107,11 @@ public class ScheduleView implements Serializable {
         		horario.put(""+i, ""+i);
         	}
         }
+        //for(Animal a: cliente.getAnimais()){
+        	//mapaAnimais.put(a.getNome(), a.getNome());
+        //}
     }
+    
      
     public Date getRandomDate(Date base) {
         Calendar date = Calendar.getInstance();
@@ -225,5 +247,65 @@ public class ScheduleView implements Serializable {
 
 	public void setHora(String hora) {
 		this.hora = hora;
+	}
+
+	public Map<String, String> getMapaAnimais() {
+		return mapaAnimais;
+	}
+
+	public void setMapaAnimais(Map<String, String> mapaAnimais) {
+		this.mapaAnimais = mapaAnimais;
+	}
+
+	public String getAnimal() {
+		return animal;
+	}
+
+	public void setAnimal(String animal) {
+		this.animal = animal;
+	}
+
+	public List<Animal> getAnimais() {
+		return animais;
+	}
+
+	public void setAnimais(List<Animal> animais) {
+		this.animais = animais;
+	}
+
+	public AnimalService getDaoAnimal() {
+		return daoAnimal;
+	}
+
+	public void setDaoAnimal(AnimalService daoAnimal) {
+		this.daoAnimal = daoAnimal;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+
+	public Agenda getAngenda() {
+		return angenda;
+	}
+
+
+	public void setAngenda(Agenda angenda) {
+		this.angenda = angenda;
+	}
+
+
+	public AgendaMB getAgendaMB() {
+		return agendaMB;
+	}
+
+
+	public void setAgendaMB(AgendaMB agendaMB) {
+		this.agendaMB = agendaMB;
 	}
 }

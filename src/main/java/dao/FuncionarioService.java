@@ -161,5 +161,18 @@ public class FuncionarioService implements Serializable {
             return null;
         }
     }
+     
+     public Funcionario findFuncionarioEmail(String email){
+         EntityManager em = getEntityManager();
+         TypedQuery<Funcionario> query;
+         query = em.createQuery("select a from Funcionario a where a.email=:email"
+                                , Funcionario.class);
+         query.setParameter("email", email);
+         try{
+             return query.getSingleResult();
+         }catch(NoResultException e){
+             return null;
+         }
+     }
     
 }

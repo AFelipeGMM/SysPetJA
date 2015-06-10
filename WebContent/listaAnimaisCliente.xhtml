@@ -49,8 +49,13 @@
             </h:form> 
             <br/>
             <center>
-			<h:form id="formCadastroAnimal">
+			
+			<h:form id="formCadastro">
 				<h:panelGrid>
+				  <h:panelGrid columns="2" width="500">
+				  		<p:layoutUnit position="east" closable="false" style="border: none"  >
+	                    	<center><p:graphicImage library="imagens" name="dogs.png"></p:graphicImage></center>                     
+	        			</p:layoutUnit>
 					<p:panel header="Dados do animal">
 						<h:panelGrid columns="2" width="500">
 							<h:outputText value="Nome: "/>
@@ -87,10 +92,11 @@
 						<p:separator/>
 						
 						<h:panelGrid columns="2">
-							<p:commandButton id="btGravar" value="GRAVAR" action="#{clienteMB.salvarAnimal(loginPessoaMB.cliente)}" ajax="false" />
-	                        <p:commandButton value="CANCELAR" type="reset"/>
+							<p:commandButton value="Salvar" action="#{clienteMB.salvarAnimal(loginPessoaMB.cliente)}" ajax="false"/>
+	                        <p:commandButton value="Cancelar" type="reset"/>
 	                       </h:panelGrid>
 					</p:panel>
+					</h:panelGrid>
 				</h:panelGrid>
 			</h:form>
 		</center>

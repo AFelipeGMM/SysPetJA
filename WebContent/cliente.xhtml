@@ -42,6 +42,9 @@
                         <p:menuitem value="Cadastrar" url="listaAnimaisCliente.xhtml" />
                     </p:submenu> 
                     
+                    <p:submenu label="Agenda">  
+                        <p:menuitem value="Cadastrar" url="newAgendamento.xhtml" action="#{scheduleView.setCliente(loginPessoaMB.getCliente())}"/>
+                    </p:submenu>
                     <p:menuitem value="Sair" icon="ui-icon-close" action="#{loginPessoaMB.deslogarC()}"/> 
 
                 </p:menubar>  

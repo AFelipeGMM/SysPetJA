@@ -10,6 +10,7 @@ import javax.faces.bean.RequestScoped;
 
 import dao.exceptions.NonexistentEntityException;
 import dao.util.JPAUtil;
+import dao.util.Validation;
 import dao.EnderecoService;
 import dao.FuncionarioService;
 import models.Agenda;
@@ -30,7 +31,14 @@ public class FuncionarioMB {
 	private List<Funcionario> funcionarios;
 	private Agenda agenda = new Agenda();
     private List<Agenda> animais = new ArrayList<Agenda>();
+    private String mensagem = "";
 	
+	public String getMensagem() {
+		return mensagem;
+	}
+	public void setMensagem(String mensagem) {
+		this.mensagem = mensagem;
+	}
 	public String getFuncionarioPesquisado() {
 		return funcionarioPesquisado;
 	}
@@ -60,9 +68,20 @@ public class FuncionarioMB {
 	
 	public void salvar() {
 		try {
-			daoEnd.createEndereco(endereco);
-			this.getFuncionario().setEndereco(endereco);
-			dao.create(funcionario);
+			Validation validacao = new Validation();
+			Funcionario aux = dao.findFuncionarioEmail(funcionario.getEmail()); //usado para verificar se ja existe o email
+			if(aux == null){
+				daoEnd.createEndereco(endereco);
+				this.getFuncionario().setEndereco(endereco);
+				dao.create(funcionario);
+				funcionario = new Funcionario();
+				endereco = new Endereco();
+				this.setMensagem(this.funcionario.getNome() + " cadastrado(a) com sucesso! ");
+	            validacao.mensagemConfirmarCadastro(mensagem);
+				
+			}else{
+				validacao.mensagemConfirmarCadastro("O email " + funcionario.getEmail() + " ja é cadastrado");
+			}
 		} catch(Exception e) {
 			//TODO
 		}

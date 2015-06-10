@@ -20,6 +20,7 @@ import dao.ClienteService;
 import dao.EnderecoService;
 import dao.exceptions.NonexistentEntityException;
 import dao.util.JPAUtil;
+import dao.util.Validation;
 import models.Animal;
 import models.Cliente;
 import models.Endereco;
@@ -73,20 +74,33 @@ public class ClienteMB {
     
     //metodo usado para setar o cliente logado e add o animal
     public void salvarAnimal(Cliente cliente) throws NonexistentEntityException, Exception{
+    	Validation validacao = new Validation();
     	this.setCliente(cliente);
     	cliente.addAnimal(animal);
     	daoAnimal.createAnimal(animal);
     	dao.edit(cliente);
+    	this.setMensagem(" cadastrado(a) com sucesso! ");
+        validacao.mensagemConfirmarCadastro(mensagem);
     }
 
     //metodo de inserção no banco de dados
     public void inserir() {
+    	Validation validacao = new Validation();
         try {
-        	daoEndereco.createEndereco(endereco);
-        	cliente.setEndereco(endereco);
-            dao.create(cliente);
-            this.setMensagem(this.cliente.getNome() + " cadastrado(a) com sucesso! ");
-            cliente = new Cliente();
+        	Cliente aux = dao.findClienteEmail(cliente.getEmail()); //usado para verificar se o email ja eh cadastrado
+        	
+        	if(aux == null){
+	        	daoEndereco.createEndereco(endereco);
+	        	cliente.setEndereco(endereco);
+	            dao.create(cliente);
+	            this.setMensagem(this.cliente.getNome() + " cadastrado(a) com sucesso! ");
+	            validacao.mensagemConfirmarCadastro(mensagem);
+	            cliente = new Cliente();
+	            endereco = new Endereco();
+        	}else{
+        		validacao.mensagemConfirmarCadastro("O Email " + cliente.getEmail() + " ja é cadastrado");
+        		
+        	}
         } catch (Exception ex) {
             setMensagem(this.cliente.getNome() + "já existe no sistema, cadastro não realizado!");
             Logger.getLogger(ClienteMB.class.getName()).log(Level.SEVERE, null, ex);
@@ -101,6 +115,7 @@ public class ClienteMB {
             daoEndereco.destroy(idEndereco);
             setMensagemExclusao(this.cliente.getNome() + "  foi excluído(a) com sucesso!");
             cliente = new Cliente();
+            endereco = new Endereco();
         } catch (NonexistentEntityException ex) {
             this.setMensagemExclusao("id não existe");
             Logger.getLogger(ClienteMB.class.getName()).log(Level.SEVERE, null, ex);

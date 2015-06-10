@@ -159,6 +159,19 @@ public class ClienteService implements Serializable {
         }catch(NoResultException e){
             return null;
         }
+        
+        
     }
-    
+     public Cliente findClienteEmail(String email){
+         EntityManager em = getEntityManager();
+         TypedQuery<Cliente> query;
+         query = em.createQuery("select a from Cliente a where a.email=:email"
+                               , Cliente.class);
+         query.setParameter("email", email);
+         try{
+             return query.getSingleResult();
+         }catch(NoResultException e){
+             return null;
+         }
+     }
 }
